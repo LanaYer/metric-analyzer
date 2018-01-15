@@ -15,10 +15,13 @@ class CreateSegmentsTable extends Migration
     {
         Schema::create('segments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('project_id');
+            $table->integer('project_id')->unsigned();
             $table->string('name');
             $table->text('pages');
             $table->timestamps();
+        });
+        Schema::table('segments', function (Blueprint $table) {
+            $table->foreign('project_id')->references('id')->on('projects');
         });
     }
 

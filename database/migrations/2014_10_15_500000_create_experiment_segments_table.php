@@ -13,13 +13,15 @@ class CreateExperimentSegmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('expsegments', function (Blueprint $table) {
+        Schema::create('experiment_segments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('experiment_id');
-            $table->integer('segment_id');
+            $table->integer('experiment_id')->unsigned();
+            $table->integer('segment_id')->unsigned();
+            $table->timestamps();
+        });
+        Schema::table('experiment_segments', function (Blueprint $table) {
             $table->foreign('experiment_id')->references('id')->on('experiments');
             $table->foreign('segment_id')->references('id')->on('segments');
-            $table->timestamps();
         });
     }
 
@@ -30,6 +32,6 @@ class CreateExperimentSegmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('expsegments');
+        Schema::dropIfExists('experiment_segments');
     }
 }
