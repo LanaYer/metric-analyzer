@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/new-project', function () {
+    return view('project.add');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/project-add', 'HomeController@index')->name('home');

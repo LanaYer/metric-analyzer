@@ -1,0 +1,74 @@
+.dashboard{
+    float: left;
+    width: 100%;
+    display: inline-block;
+    background: #fff;
+}
+.navbar, .dropdown-menu{
+    background: #0271ab!important;
+}
+.navbar a{
+    color: #fff!important;
+}
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+    background-color: #6a95b1 !important;
+    color: #9f9f9f;
+}
+.navbar-default a:hover{
+    background-color: #6a95b1 !important;
+    color: #9f9f9f;
+}
+.project-block{
+    width: 100%;
+    display: inline-block;
+    float: left;
+    border: 1px solid #919191;
+    border-radius: 3px;
+}
+.project-block-name{
+    width: 100%;
+    display: inline-block;
+    float: left;
+    background: #919191;
+    padding: 10px 15px;
+    color: #fff;
+    font-weight: 700;
+}
+.project-block-date, .project-block-options{
+    padding: 10px 15px;
+    color: #919191;
+}
+.project-block-date{
+    text-align: right;
+}
+.project-block-options a{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    text-align: center;
+    padding-top: 5px;
+}
+.project-block-options a i{
+    height: 30px;
+    width: auto;
+    margin-top: 5px;
+    color: #b0b0b0;
+    font-size: 20px;
+}
+.project-block-options a:hover{
+    background: #f1f1f1;
+}
+.project-block.active .project-block-name{
+    background: #0281c6;
+}
+.dashboard-new{
+    text-align: right;
+    width: 100%;
+    display: inline-block;
+    float: left;
+    padding: 15px;
+}
