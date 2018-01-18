@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $projects = Project::where('id', auth()->user()->id)->get();
+        $projects = Project::where('user_id', auth()->user()->id)->get();
 
         return view('home', ['projects' => $projects ]);
 
