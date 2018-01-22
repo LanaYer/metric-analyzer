@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    <ul class="breadcrumb">
+        <li><a href="/dashboard"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
+        <li class="active">Новый проект</li>
+    </ul>
+@stop
+
 @section('content')
     <div class="container">
         <div class="row">

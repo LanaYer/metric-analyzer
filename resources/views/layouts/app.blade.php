@@ -45,7 +45,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('index') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
@@ -73,7 +73,14 @@
             </div>
         </nav>
 
-        @yield('content')
+        <div class="container">
+
+            @yield('breadcrumbs')
+
+            @yield('content')
+
+        </div>
+
     </div>
 
     <!-- Scripts -->

@@ -12,8 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('home');
-});
+    return view('index');
+})->name('index');
 
 Route::get('/new-project', function () {
     return view('project.add');
@@ -21,6 +21,6 @@ Route::get('/new-project', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Route::post('/project-add', 'ProjectController@add')->name('project-add');

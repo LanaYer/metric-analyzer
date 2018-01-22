@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Project;
 use App\User;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,7 +27,6 @@ class HomeController extends Controller
     {
         $projects = Project::where('user_id', auth()->user()->id)->get();
 
-        return view('home', ['projects' => $projects ]);
-
+        return view('index', ['projects' => $projects]);
     }
 }
