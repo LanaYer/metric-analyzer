@@ -9,6 +9,13 @@ class ProjectController extends Controller
 {
     protected $redirectTo = '/home';
 
+    public function index($id)
+    {
+        $project = Project::where('id', $id)->get();
+
+        return view('project.update', ['project' => $project ]);
+    }
+
     public function add(Request $request)
     {
         Project::create([
@@ -18,6 +25,11 @@ class ProjectController extends Controller
             'ym_login' => $request->ym_login,
             'ym_token' => $request->ym_token
         ]);
-        return redirect('/home');
+        return redirect('/index');
+    }
+
+    public function update(Request $request)
+    {
+
     }
 }

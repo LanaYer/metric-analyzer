@@ -11,16 +11,22 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('index');
 })->name('index');
 
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+//Создание проекта
 Route::get('/new-project', function () {
     return view('project.add');
 });
 
-Auth::routes();
-
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-
 Route::post('/project-add', 'ProjectController@add')->name('project-add');
+
+// Редактирование проекта
+Route::get('/dashboard/project/{id}', 'ProjectController@index')->name('project');
+
+Route::post('/project-update', 'ProjectController@update')->name('project-update');

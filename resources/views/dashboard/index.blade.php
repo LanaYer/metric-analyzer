@@ -12,7 +12,7 @@
                             @endif
                                 <div class="project-block-name">{{ $project->name }}</div>
                                 <div class="project-block-options">
-                                    <a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <a href="/dashboard/project/{{ $project->id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                     <a href=""><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     <a href=""><i class="fa fa-eye" aria-hidden="true"></i></a>
                                 </div>
