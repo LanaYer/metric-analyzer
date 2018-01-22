@@ -18,6 +18,8 @@
                         <form class="form-horizontal" method="POST" action="{{ route('project-update') }}">
                             {{ csrf_field() }}
 
+                            <input name="id" value="{{ $project[0]->id }}" hidden>
+
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-2 control-label">Название</label>
 
@@ -73,6 +75,19 @@
                                     @endif
                                 </div>
                             </div>
+
+                            <div class="form-group{{ $errors->has('ym_token') ? ' has-error' : '' }}">
+                                <label for="ym_token" class="col-md-2 control-label">Активен</label>
+
+                                <div class="col-md-10">
+                                    @if ($project[0]->is_active)
+                                        <input name="is_active" type="checkbox" checked/>
+                                    @else
+                                        <input name="is_active" type="checkbox"/>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

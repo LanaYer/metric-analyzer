@@ -25,11 +25,26 @@ class ProjectController extends Controller
             'ym_login' => $request->ym_login,
             'ym_token' => $request->ym_token
         ]);
-        return redirect('/index');
+        return redirect('/dashboard');
     }
 
     public function update(Request $request)
     {
+        $project = Project::find($request->id);
+        $isActive = 0;
 
+        if ($request->is_active){
+            $isActive = 1;
+        }
+
+        $project->name = $request->name;
+        $project->url = $request->url;
+        $project->ym_login = $request->ym_login;
+        $project->ym_token = $request->ym_token;
+        $project->is_active = $isActive;
+
+        $project->save();
+
+        return redirect('/dashboard');
     }
 }
