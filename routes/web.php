@@ -20,7 +20,7 @@ Route::get('/', function () {
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 //Создание проекта
-Route::get('/new-project', function () {
+Route::get('/dashboard/project/add', function () {
     return view('project.add');
 });
 
@@ -30,3 +30,6 @@ Route::post('/project-add', 'ProjectController@add')->name('project-add');
 Route::get('/dashboard/project/{id}', 'ProjectController@index')->name('project');
 
 Route::post('/project-update', 'ProjectController@update')->name('project-update');
+
+//Сегменты
+Route::get('/dashboard/project/{id}/segment', 'SegmentController@index')->name('segment');

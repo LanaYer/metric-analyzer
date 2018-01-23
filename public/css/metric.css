@@ -44,24 +44,41 @@
 }
 .project-block-options a{
     display: inline-block;
-    width: 40px;
-    height: 40px;
     margin-right: 10px;
     margin-top: 15px;
     cursor: pointer;
     border-radius: 3px;
     text-align: center;
-    padding-top: 5px;
+    height: 40px;
+    padding: 7px;
+    background: rgba(25, 112, 145, 0.09);
+    color: #919191;
 }
-.project-block-options a i{
+.project-block-options a:hover{
+    text-decoration: none;
+    background: rgba(25, 112, 145, 0.27);
+    color: #fff;
+}
+.project-block-options .project-block-options-update{
+    padding: 0;
+    padding-top: 5px;
+    width: 40px;
+    float: right;
+    background: none;
+    margin-right: 0;
+}
+.project-block-options .project-block-options-update i{
     height: 30px;
     width: auto;
     margin-top: 5px;
-    color: #b0b0b0;
+    color: #d8d8d8;
     font-size: 20px;
 }
-.project-block-options a:hover{
+.project-block-options .project-block-options-update:hover{
     background: #f1f1f1;
+}
+.project-block-options .project-block-options-update:hover i{
+    color: #919191;
 }
 .project-block.active .project-block-name{
     background: #0281c6;
@@ -71,5 +88,8 @@
     width: 100%;
     display: inline-block;
     float: left;
-    padding: 15px;
+    padding: 0 15px 20px 15px;
+}
+input[type="checkbox"]{
+    margin: 12px 0 0;
 }
