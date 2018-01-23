@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Segment;
+use App\Models\Segment;
 use Illuminate\Http\Request;
-use App\Project;
+use App\Models\Project;
 
 class ExperimentController extends Controller
 {
