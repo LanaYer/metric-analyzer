@@ -33,3 +33,6 @@ Route::post('/project-update', 'ProjectController@update')->name('project-update
 
 //Сегменты
 Route::get('/dashboard/project/{id}/segment', 'SegmentController@index')->name('segment');
+
+//Эксперименты
+Route::get('/dashboard/project/{id}/experiment', 'SegmentController@index')->name('experiment');

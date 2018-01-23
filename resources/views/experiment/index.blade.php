@@ -14,7 +14,7 @@
             <button type="button" class="btn btn-primary">Новый сегмент</button>
         </a>
     </div>
-            @if (isset($segments))
+            @if (isset($experiments))
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -24,12 +24,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($segments as $segment)
+                    @foreach ($experiments as $experiment)
                         <tr>
-                            <td>{{ $segment->name }}</td>
-                            <td>{{ $segment->pages }}</td>
+                            <td>{{ $experiment->name }}</td>
+                            <td>{{ $experiment->description }}</td>
                             <td>
-                                <a href="/dashboard/project/{{ $project_id }}/segment/{{ $segment->id }}">
+                                <a href="/dashboard/project/{{ $project_id }}/segment/{{ $experiment->id }}">
                                     <button type="button" class="btn btn-primary">Редактировать</button>
                                 </a>
                             </td>
