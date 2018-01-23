@@ -15,4 +15,19 @@ class SegmentController extends Controller
 
         return view('segment.index', ['segments' => $segments, 'project_id' => $id]);
     }
+
+    public function add_form($id)
+    {
+        return view('segment.add', ['project_id' => $id]);
+    }
+
+    public function add(Request $request)
+    {
+        Segment::create([
+            'project_id' => $request->project_id,
+            'name' => $request->name,
+            'pages' => $request->page
+        ]);
+        return redirect('/dashboard/project/'.$request->project_id.'/segment');
+    }
 }
