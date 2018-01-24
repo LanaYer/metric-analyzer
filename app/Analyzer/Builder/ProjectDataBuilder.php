@@ -10,7 +10,7 @@ namespace app\Analyzer\Builder;
 
 
 use App\Analyzer\Metrika\VisitReport;
-use App\Project;
+use App\Models\Project;
 use Carbon\Carbon;
 
 class ProjectDataBuilder
@@ -32,13 +32,20 @@ class ProjectDataBuilder
     {
         $result = [];
         $loader = new VisitReport($this->project->ym_login, $this->project->ym_token);
-        foreach ($this->getMonths() as $month)
+        foreach ($this->getWeeks() as $week)
         {
-            $file = $this->getReportFile($month);
-            $content = $loader->load($month->firstOfMonth(), $month->lastOfMonth());
-            fwrite($file, $content);
-            fclose($file);
-            $result[$this->getReportFileName($month)] = mb_strlen($content);
+            $reportFile = $this->getReportFileName($week);
+
+            if ($week->isLastWeek() || !is_file($reportFile)) {
+                $file = $this->getReportFile($week);
+                $content = $loader->load($week, (new Carbon($week))->addDay(6));
+                if (!empty($content)) {
+                    fwrite($file, $content);
+                    fclose($file);
+                }
+            }
+
+            $result[$reportFile] = filesize($reportFile);
         }
 
         return $result;
@@ -47,17 +54,19 @@ class ProjectDataBuilder
     /**
      * @return Carbon[]
      */
-    public function getMonths()
+    public function getWeeks()
     {
-        $yesterday = Carbon::yesterday();
-        $lastLoad = new Carbon($this->project->last_load_at);
-        $lastLoad->addDay();
+        $currentWeek = (new Carbon())->startOfWeek();
+        if (!$this->project->start_at) {
+            return [];
+        }
+        $startAt = (new Carbon($this->project->start_at))->startOfWeek();
 
         $periods = [];
 
-        while ($lastLoad < $yesterday) {
-            $periods[] = $lastLoad;
-            $lastLoad = $lastLoad->addMonth();
+        while ($startAt->timestamp < $currentWeek->timestamp) {
+            $periods[] = new Carbon($startAt);
+            $startAt->addWeek();
         }
 
        return $periods;
@@ -71,6 +80,11 @@ class ProjectDataBuilder
 
     public function getReportFileName(Carbon $date)
     {
-        return config('analyzer.path_to_data') ."/" . $this->project ."/visits_" . $date->format('Y_m') . ".csv";
+        $dir = config('analyzer.path_to_data') ."/" . $this->project->id;
+        var_dump($dir);
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+        return $dir ."/visits_" . $date->format('Y_m_d') . ".csv";
     }
 }

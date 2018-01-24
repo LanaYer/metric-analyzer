@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Analyzer\Builder\ProjectDataBuilder;
-use App\Project;
+use App\Models\Project;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -41,8 +41,20 @@ class ProjectDataBuildJob implements ShouldQueue
             $builder = new ProjectDataBuilder($project);
             $results = $builder->loadData();
 
+            $totalFile = config('analyzer.path_to_data') . "/" . $project->id."/visits.csv";
+            if (is_file($totalFile)) {
+                unlink($totalFile);
+            }
+
+            if (count($results)) {
+                file_put_contents(
+                    $totalFile,
+                    '"week","visit date","search system","enter page","visit num","visitors","bounce","depth","page time","total"'.PHP_EOL
+                );
+            }
+
             foreach ($results as $file => $length) {
-                echo $file . '('.$length.')'.PHP_EOL;
+                file_put_contents($totalFile, file_get_contents($file),FILE_APPEND);
             }
         }
     }
