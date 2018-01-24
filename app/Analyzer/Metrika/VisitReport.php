@@ -24,7 +24,7 @@ class VisitReport extends ReportLoader
     {
         return [
             'metrics' => "ym:s:visits,ym:s:users,ym:s:bounceRate,ym:s:pageDepth,ym:s:avgVisitDurationSeconds",
-            'dimensions' => 'ym:s:startOfWeek,ym:s:date,ym:s:paramsLevel2,ym:s:LastSearchEngineRoot,ym:s:startURLHash',
+            'dimensions' => 'ym:s:startOfWeek,ym:s:date,ym:s:LastSearchEngineRoot,ym:s:startURLHash',
             'filter' => "(ym:s:trafficSource=='organic')+and+ym:s:startOfWeek!n",
             'limit' => '100000'
         ];
