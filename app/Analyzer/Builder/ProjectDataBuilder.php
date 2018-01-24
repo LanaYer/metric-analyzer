@@ -10,7 +10,7 @@ namespace app\Analyzer\Builder;
 
 
 use App\Analyzer\Metrika\VisitReport;
-use App\Project;
+use App\Models\Project;
 use Carbon\Carbon;
 
 class ProjectDataBuilder
