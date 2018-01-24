@@ -37,4 +37,16 @@ class SegmentController extends Controller
         ]);
         return redirect('/dashboard/project/'.$request->project_id.'/segment');
     }
+
+    public function update(Request $request)
+    {
+        $segment = Segment::find($request->segment_id);
+
+        $segment->name = $request->name;
+        $segment->pages = $request->page;
+
+        $segment->save();
+
+        return redirect('/dashboard/project/'.$segment->project_id.'/segment');
+    }
 }

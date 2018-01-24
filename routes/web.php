@@ -40,6 +40,8 @@ Route::post('/segment-add', 'SegmentController@add')->name('segment-add');
 
 Route::get('/dashboard/project/{id}/segment/{segment_id}', 'SegmentController@show')->name('segment');
 
+Route::post('/segment-update', 'SegmentController@update')->name('segment-update');
+
 //Эксперименты
 Route::get('/dashboard/project/{id}/experiment', 'SegmentController@index')->name('experiment');
 

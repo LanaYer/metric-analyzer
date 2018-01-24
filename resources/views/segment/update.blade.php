@@ -17,10 +17,10 @@
                     <div class="panel-heading">Новый сегмент</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('segment-add') }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('segment-update') }}">
                             {{ csrf_field() }}
 
-                            <input name="project_id" value="{{ $project_id }}" hidden>
+                            <input name="segment_id" value="{{$segment[0]->id}}" hidden>
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-2 control-label">Название</label>
