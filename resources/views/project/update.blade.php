@@ -79,7 +79,7 @@
                             <div class="form-group{{ $errors->has('ym_token') ? ' has-error' : '' }}">
                                 <label for="ym_token" class="col-md-2 control-label">Активен</label>
 
-                                <div class="col-md-10">
+                                <div class="col-md-10 form-active-checkbox">
                                     @if ($project[0]->is_active)
                                         <input name="is_active" type="checkbox" checked/>
                                     @else

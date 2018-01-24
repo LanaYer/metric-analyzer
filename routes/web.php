@@ -32,11 +32,13 @@ Route::get('/dashboard/project/{id}', 'ProjectController@index')->name('project'
 Route::post('/project-update', 'ProjectController@update')->name('project-update');
 
 //Сегменты
-Route::get('/dashboard/project/{id}/segment', 'SegmentController@index')->name('segment');
+Route::get('/dashboard/project/{id}/segment', 'SegmentController@index')->name('segments');
 
 Route::get('/dashboard/project/{id}/segment/add', 'SegmentController@add_form')->name('segment-add-form');
 
 Route::post('/segment-add', 'SegmentController@add')->name('segment-add');
+
+Route::get('/dashboard/project/{id}/segment/{segment_id}', 'SegmentController@show')->name('segment');
 
 //Эксперименты
 Route::get('/dashboard/project/{id}/experiment', 'SegmentController@index')->name('experiment');

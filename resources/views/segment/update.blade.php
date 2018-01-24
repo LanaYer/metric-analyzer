@@ -3,7 +3,9 @@
 @section('breadcrumbs')
     <ul class="breadcrumb">
         <li><a href="/dashboard"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
-        <li class="active">Редактирование проекта</li>
+        <li class="active">{{ $project_id }}<i class="icon-angle-right"></i></li>
+        <li class="active">Сегменты</li>
+        <li class="active">{{$segment[0]->name}}</li>
     </ul>
 @stop
 
@@ -12,19 +14,19 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Редактирование проекта</div>
+                    <div class="panel-heading">Новый сегмент</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('project-update') }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('segment-add') }}">
                             {{ csrf_field() }}
 
-                            <input name="id" value="{{ $project[0]->id }}" hidden>
+                            <input name="project_id" value="{{ $project_id }}" hidden>
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-2 control-label">Название</label>
 
                                 <div class="col-md-10">
-                                    <input id="name" type="text" class="form-control" name="name" value="{{ $project[0]->name }}" required autofocus>
+                                    <input id="name" type="text" class="form-control" value="{{$segment[0]->name}}" name="name" required autofocus>
 
                                     @if ($errors->has('name'))
                                         <span class="help-block">
@@ -35,55 +37,15 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
-                                <label for="url" class="col-md-2 control-label">Url</label>
+                                <label for="page" class="col-md-2 control-label">Страница</label>
 
                                 <div class="col-md-10">
-                                    <input id="url" type="text" class="form-control" name="url" value="{{ $project[0]->url }}" required autofocus>
+                                    <input id="page" type="text" class="form-control" value="{{$segment[0]->pages}}" name="page" required autofocus>
 
-                                    @if ($errors->has('url'))
+                                    @if ($errors->has('page'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('url') }}</strong>
+                                        <strong>{{ $errors->first('page') }}</strong>
                                     </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('ym_login') ? ' has-error' : '' }}">
-                                <label for="ym_login" class="col-md-2 control-label">Логин</label>
-
-                                <div class="col-md-10">
-                                    <input id="ym_login" type="text" class="form-control" name="ym_login" value="{{ $project[0]->ym_login }}" required autofocus>
-
-                                    @if ($errors->has('ym_login'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('ym_login') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('ym_token') ? ' has-error' : '' }}">
-                                <label for="ym_token" class="col-md-2 control-label">Токен</label>
-
-                                <div class="col-md-10">
-                                    <input id="ym_token" type="text" class="form-control" name="ym_token" value="{{ $project[0]->ym_token }}" required autofocus>
-
-                                    @if ($errors->has('ym_token'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('ym_token') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('ym_token') ? ' has-error' : '' }}">
-                                <label for="ym_token" class="col-md-2 control-label">Активен</label>
-
-                                <div class="col-md-10">
-                                    @if ($project[0]->is_active)
-                                        <input name="is_active" type="checkbox" checked/>
-                                    @else
-                                        <input name="is_active" type="checkbox"/>
                                     @endif
                                 </div>
                             </div>
