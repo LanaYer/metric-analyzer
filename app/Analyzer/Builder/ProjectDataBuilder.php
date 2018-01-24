@@ -34,19 +34,18 @@ class ProjectDataBuilder
         $loader = new VisitReport($this->project->ym_login, $this->project->ym_token);
         foreach ($this->getWeeks() as $week)
         {
-            $file = $this->getReportFile($week);
-            $content = $loader->load($week, (new Carbon($week))->addDay(6));
-            if (!empty($content)) {
-                fwrite($file, $content);
-                fclose($file);
-                $result[$this->getReportFileName($week)] = mb_strlen($content);
-                if (!$week->isLastWeek()) {
-                    $this->project->last_load_at = $week->format('Y-m-d');
-                    $this->project->save();
-                }
+            $reportFile = $this->getReportFileName($week);
 
+            if ($week->isLastWeek() || !is_file($reportFile)) {
+                $file = $this->getReportFile($week);
+                $content = $loader->load($week, (new Carbon($week))->addDay(6));
+                if (!empty($content)) {
+                    fwrite($file, $content);
+                    fclose($file);
+                }
             }
 
+            $result[$reportFile] = filesize($reportFile);
         }
 
         return $result;
@@ -58,17 +57,16 @@ class ProjectDataBuilder
     public function getWeeks()
     {
         $currentWeek = (new Carbon())->startOfWeek();
-        $startAt = $this->project->last_load_at ? $this->project->last_load_at : $this->project->start_at;
-        if (!$startAt) {
+        if (!$this->project->start_at) {
             return [];
         }
-        $lastLoad = (new Carbon($startAt))->startOfWeek();
+        $startAt = (new Carbon($this->project->start_at))->startOfWeek();
 
         $periods = [];
 
-        while ($lastLoad->timestamp < $currentWeek->timestamp) {
-            $periods[] = new Carbon($lastLoad);
-            $lastLoad->addWeek();
+        while ($startAt->timestamp < $currentWeek->timestamp) {
+            $periods[] = new Carbon($startAt);
+            $startAt->addWeek();
         }
 
        return $periods;

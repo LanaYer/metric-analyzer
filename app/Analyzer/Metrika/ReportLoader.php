@@ -62,18 +62,11 @@ abstract class ReportLoader
     public function load(Carbon $from, Carbon $to)
     {
         $url = $this->getUrl() ."&date1=" . $from->format('Y-m-d') . "&date2=" . $to->format('Y-m-d');
-        $file = fopen($url, "r");
-        if (!$file) {
+        $rows = file($url);
+        if (!$rows) {
            throw new Exception('Не удалось открыть отчет');
         }
 
-        $content = null;
-        while (!feof ($file)) {
-            $content .= fgets ($file, 4096);
-
-        }
-        fclose($file);
-
-        return $content;
+        return implode('', array_slice($rows, 2));
     }
 }
