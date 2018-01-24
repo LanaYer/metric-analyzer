@@ -10,10 +10,15 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/metric.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('css/select2.min.css')}}" rel="stylesheet" />
+    <script src="{{ asset('js/select2.min.js')}}"></script>
+
 </head>
 <body>
     <div id="app">

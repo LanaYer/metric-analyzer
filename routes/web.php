@@ -43,8 +43,12 @@ Route::get('/dashboard/project/{id}/segment/{segment_id}', 'SegmentController@sh
 Route::post('/segment-update', 'SegmentController@update')->name('segment-update');
 
 //Эксперименты
-Route::get('/dashboard/project/{id}/experiment', 'SegmentController@index')->name('experiment');
+Route::get('/dashboard/project/{id}/experiment', 'ExperimentController@index')->name('experiments');
 
-Route::get('/dashboard/project/{id}/experiment/add', function () {
-    return view('experiment.add');
-});
+Route::get('/dashboard/project/{id}/experiment/add', 'ExperimentController@add_form')->name('experiment-add-form');
+
+Route::post('/experiment-add', 'ExperimentController@add')->name('experiment-add');
+
+Route::get('/dashboard/project/{id}/experiment/{experiment_id}', 'SegmentController@show')->name('experiment');
+
+Route::post('/experiment-update', 'ExperimentController@update')->name('experiment-update');
