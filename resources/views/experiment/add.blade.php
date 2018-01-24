@@ -19,7 +19,7 @@
                             {{ csrf_field() }}
 
                             <input name="project_id" value="{{ $project_id }}" hidden>
-                            
+
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-2 control-label">Название</label>
 
@@ -61,11 +61,9 @@
 
                                 <div class="col-md-10">
                                     <select multiple="multiple" id="js-example-basic-multiple" name="segments[]">
-                                        <option value="AL">Alabama</option>
-                                        <option value="Am">Amalapuram</option>
-                                        <option value="An">Anakapalli</option>
-                                        <option value="Ak">Akkayapalem</option>
-                                        <option value="WY">Wyoming</option>
+                                        @foreach($segments as $segment)
+                                            <option value="{{$segment->id}}">{{$segment->name}}</option>
+                                        @endforeach
                                     </select>
                                     <script>
                                         $(document).ready(function() {

@@ -49,6 +49,6 @@ Route::get('/dashboard/project/{id}/experiment/add', 'ExperimentController@add_f
 
 Route::post('/experiment-add', 'ExperimentController@add')->name('experiment-add');
 
-Route::get('/dashboard/project/{id}/experiment/{experiment_id}', 'SegmentController@show')->name('experiment');
+Route::get('/dashboard/project/{id}/experiment/{experiment_id}', 'ExperimentController@show')->name('experiment');
 
 Route::post('/experiment-update', 'ExperimentController@update')->name('experiment-update');
