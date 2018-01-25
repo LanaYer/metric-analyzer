@@ -52,3 +52,6 @@ Route::post('/experiment-add', 'ExperimentController@add')->name('experiment-add
 Route::get('/dashboard/project/{id}/experiment/{experiment_id}', 'ExperimentController@show')->name('experiment');
 
 Route::post('/experiment-update', 'ExperimentController@update')->name('experiment-update');
+
+//Результаты
+Route::get('/dashboard/project/{id}/experiment/{experiment_id}/results', 'ResultsController@index')->name('results');

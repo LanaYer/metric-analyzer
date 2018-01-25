@@ -21,6 +21,7 @@
                         <th>Название</th>
                         <th>Описание</th>
                         <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,6 +36,11 @@
                             <td class="text-right">
                                 <a href="/dashboard/project/{{ $project_id }}/experiment/{{ $experiment->id }}">
                                     <button type="button" class="btn btn-primary">Редактировать</button>
+                                </a>
+                            </td>
+                            <td class="text-right">
+                                <a href="/dashboard/project/{{ $project_id }}/experiment/{{ $experiment->id }}/results">
+                                    <button type="button" class="btn btn-primary">Результаты</button>
                                 </a>
                             </td>
                         </tr>
