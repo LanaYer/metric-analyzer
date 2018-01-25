@@ -34,4 +34,14 @@ class Project extends Model
         return $query->where('is_active', '=', '1');
     }
 
+    /**
+     * Путь к папке с данными
+     *
+     * @return string
+     */
+    public function getDataDir()
+    {
+        return config('analyzer.path_to_data') . "/" . $this->id;
+    }
+
 }

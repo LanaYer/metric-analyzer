@@ -1,6 +1,6 @@
 import pandas as pd
 import sys, getopt
-import json
+import json, csv
 
 
 def main(argv):
@@ -31,8 +31,11 @@ def main(argv):
    df = pd.read_csv(directory+"/"+data+".csv")
 
 
+   out_df = pd.DataFrame()
    if method == 'visits':
-      print visits(df, patterns)
+       out_df = visits(df, patterns)
+
+   out_df.to_csv(path_or_buf = directory+"/"+experiment+"_" + method + ".csv", encoding='utf-8', quoting=csv.QUOTE_NONNUMERIC, index=False);
 
 
 
@@ -42,23 +45,36 @@ def visits(df, patterns):
 
 def pagesByTimePeriod(df, patterns):
 
-    df2 = pd.DataFrame();
+    weeks = df['week'].unique()
+    df2 = pd.DataFrame({'week' : weeks}).sort_values(by = 'week', ascending=True)
+    df2.set_index('week')
 
-    num = 0;
-    for i in patterns:
-        print i
-        pages_df = df[
-            df['enter page'].str.contains(i)
-        ].sort_values(by = 'week', ascending=False).groupby('week')[['visit num']].sum()
+    result = df2
+    #print df2
 
-        if num == 0:
-            df2 = pages_df
-        else:
-            df2 = pd.merge(df2, pages_df, left_index=True, right_index=True)
 
-        num = num + 1
+    for row in patterns:
+        row_df = df2;
+        num = 0;
+        for pat in row['patterns']:
+            print pat
+            pages_df = df[
+                df['enter page'].str.contains(pat)
+            ].groupby('week')[['visit num']].sum()
 
-    return df2
+            if num == 0:
+                row_df = pd.merge(df2, pages_df, how='left', left_on='week', right_index=True)
+            else:
+                row_df['visit num'] = row_df['visit num'] + pd.merge(df2, pages_df, how='left', left_on='week', right_index=True)['visit num']
+            num = num + 1
+
+        row_df = row_df.rename(index=str, columns={'visit num': row['title']})
+        print row_df
+        result = pd.merge(result, row_df, how='left', on='week')
+
+
+    result = result.fillna(value=0, axis=1)
+    return result
 
 
 
@@ -67,7 +83,7 @@ def pagesByTimePeriod(df, patterns):
 def get_patterns(jsonfile):
    with open(jsonfile) as json_file:
        data = json.load(json_file)
-   return data;
+   return data['patterns'];
 
 
 

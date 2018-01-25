@@ -81,7 +81,6 @@ class ProjectDataBuilder
     public function getReportFileName(Carbon $date)
     {
         $dir = config('analyzer.path_to_data') ."/" . $this->project->id;
-        var_dump($dir);
         if (!is_dir($dir)) {
             mkdir($dir, 0755, true);
         }
