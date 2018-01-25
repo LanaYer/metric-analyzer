@@ -88,6 +88,7 @@
     width: 100%;
     display: inline-block;
     float: left;
+    margin-bottom: 15px;
 }
 .form-active-checkbox input[type="checkbox"]{
     margin: 12px 0 0;
@@ -100,4 +101,5 @@
     background-color: transparent;
     border-radius: 0;
     border-bottom: 1px solid #0281c6;
+    margin-bottom: 15px;
 }
