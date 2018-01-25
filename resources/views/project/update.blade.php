@@ -2,7 +2,7 @@
 
 @section('breadcrumbs')
     <ul class="breadcrumb">
-        <li><a href="/dashboard"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
+        <li><a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a><i class="icon-angle-right"></i></li>
         <li class="active">Редактирование проекта</li>
     </ul>
 @stop
@@ -89,10 +89,13 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
+                                <div class="col-md-12 text-center">
                                     <button type="submit" class="btn btn-primary">
                                         Сохранить
                                     </button>
+                                    <a href="/dashboard">
+                                        <button type="button" class="btn btn-secondary">Отмена</button>
+                                    </a>
                                 </div>
                             </div>
                         </form>

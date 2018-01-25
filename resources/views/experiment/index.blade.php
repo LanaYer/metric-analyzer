@@ -2,8 +2,8 @@
 
 @section('breadcrumbs')
     <ul class="breadcrumb">
-        <li><a href="/dashboard"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
-        <li class="active">{{ $project_id }}<i class="icon-angle-right"></i></li>
+        <li><a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a><i class="icon-angle-right"></i></li>
+        <li><a href="/dashboard/project/{{ $project_id }}">{{ $project_id }}</a><i class="icon-angle-right"></i></li>
         <li class="active">Эксперименты</li>
     </ul>
 @stop
