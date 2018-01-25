@@ -50,11 +50,13 @@ class ExperimentController extends Controller
             'is_active' => 1
         ]);
 
-        foreach ($request->segments as $segment){
-            ExperimentSegment::create([
-                'experiment_id' => $experiment->id,
-                'segment_id' => $segment,
-            ]);
+        if ($request->segments){
+            foreach ($request->segments as $segment){
+                ExperimentSegment::create([
+                    'experiment_id' => $experiment->id,
+                    'segment_id' => $segment,
+                ]);
+            }
         }
 
         return redirect('/dashboard/project/'.$request->project_id.'/experiment');
