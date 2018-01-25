@@ -20,7 +20,7 @@
                     <tr>
                         <th>Название</th>
                         <th>Страница</th>
-                        <th>Редактировать</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -28,7 +28,7 @@
                         <tr>
                             <td>{{ $segment->name }}</td>
                             <td>{{ $segment->pages }}</td>
-                            <td>
+                            <td class="text-right">
                                 <a href="/dashboard/project/{{ $project_id }}/segment/{{ $segment->id }}">
                                     <button type="button" class="btn btn-primary">Редактировать</button>
                                 </a>

@@ -19,8 +19,8 @@
                     <thead>
                     <tr>
                         <th>Название</th>
-                        <th>Страница</th>
-                        <th>Редактировать</th>
+                        <th>Описание</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -28,7 +28,7 @@
                         <tr>
                             <td>{{ $experiment->name }}</td>
                             <td>{{ $experiment->description }}</td>
-                            <td>
+                            <td class="text-right">
                                 <a href="/dashboard/project/{{ $project_id }}/experiment/{{ $experiment->id }}">
                                     <button type="button" class="btn btn-primary">Редактировать</button>
                                 </a>

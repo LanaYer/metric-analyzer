@@ -36,7 +36,7 @@
     font-weight: 700;
 }
 .project-block-date, .project-block-options{
-    padding: 10px 15px;
+    padding: 0px 15px 10px 15px;
     color: #919191;
 }
 .project-block-date{

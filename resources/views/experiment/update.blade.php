@@ -34,6 +34,32 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                                <label for="description" class="col-md-2 control-label">Описание</label>
+
+                                <div class="col-md-10">
+                                    <input id="description" type="text" class="form-control" name="description" value="{{ $experiment[0]->description }}" required autofocus>
+
+                                    @if ($errors->has('description'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('ym_token') ? ' has-error' : '' }}">
+                                <label for="ym_token" class="col-md-2 control-label">Abtest</label>
+
+                                <div class="col-md-10">
+                                    @if ($experiment[0]->is_abtest)
+                                        <input name="is_abtest" type="checkbox" checked/>
+                                    @else
+                                        <input name="is_abtest" type="checkbox"/>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group{{ $errors->has('ym_token') ? ' has-error' : '' }}">
                                 <label for="ym_token" class="col-md-2 control-label">Активен</label>
 
@@ -43,6 +69,23 @@
                                     @else
                                         <input name="is_active" type="checkbox"/>
                                     @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('ym_token') ? ' has-error' : '' }}">
+                                <label for="ym_token" class="col-md-2 control-label">Сегменты</label>
+
+                                <div class="col-md-10">
+                                    <select multiple="multiple" id="js-example-basic-multiple" name="segments[]">
+                                        @foreach($segments as $segment)
+                                            <option value="{{$segment->id}}">{{$segment->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $('#js-example-basic-multiple').select2();
+                                        });
+                                    </script>
                                 </div>
                             </div>
 

@@ -13,7 +13,7 @@ class ProjectController extends Controller
     {
         $project = Project::where('id', $id)->get();
 
-        return view('project.update', ['project' => $project ]);
+        return view('project.update', ['project' => $project]);
     }
 
     public function add(Request $request)

@@ -24,7 +24,7 @@
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a>
                                 </div>
-                                <div class="project-block-date">{{ $project->added_at }}</div>
+                                <div class="project-block-date">{{ date_create($project->added_at)->Format('d.m.Y') }}</div>
                             </div>
                         </div>
                     @endforeach
