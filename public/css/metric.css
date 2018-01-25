@@ -93,3 +93,7 @@
 .form-active-checkbox input[type="checkbox"]{
     margin: 12px 0 0;
 }
+/*--------------------------------------------------------------------*/
+.select2-container{
+    width: 100%!important;
+}
