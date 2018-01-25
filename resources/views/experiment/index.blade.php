@@ -25,7 +25,11 @@
                     </thead>
                     <tbody>
                     @foreach ($experiments as $experiment)
-                        <tr>
+                        @if($experiment->is_active)
+                            <tr class="bg-success">
+                        @else
+                            <tr>
+                        @endif
                             <td>{{ $experiment->name }}</td>
                             <td>{{ $experiment->description }}</td>
                             <td class="text-right">

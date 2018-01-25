@@ -25,7 +25,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $projects = Project::where('user_id', auth()->user()->id)->get();
+        $projects = Project::where('user_id', auth()->user()->id)->orderBy('id', 'DESC')->get();
 
         return view('index', ['projects' => $projects]);
     }

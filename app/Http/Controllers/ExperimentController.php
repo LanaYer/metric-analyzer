@@ -12,7 +12,7 @@ class ExperimentController extends Controller
 
     public function index($id)
     {
-        $experiments = Experiment::where('project_id', $id)->get();
+        $experiments = Experiment::where('project_id', $id)->orderBy('id', 'DESC')->get();
 
         return view('experiment.index',
             ['experiments' => $experiments, 'project_id' => $id]);

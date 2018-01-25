@@ -11,7 +11,7 @@ class SegmentController extends Controller
 
     public function index($id)
     {
-        $segments = Segment::where('project_id', $id)->get();
+        $segments = Segment::where('project_id', $id)->orderBy('id', 'DESC')->get();
 
         return view('segment.index', ['segments' => $segments, 'project_id' => $id]);
     }
