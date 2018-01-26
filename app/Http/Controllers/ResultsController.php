@@ -16,39 +16,38 @@ class ResultsController extends Controller
 
         $csvUrl = $experiment['visits']['data'];
 
-        $csv= file_get_contents($csvUrl);
-        $csv_array = array_map('str_getcsv', file($csvUrl));
+        if (file_exists($csvUrl)){
 
-        $config = "{
+            $csv_array = array_map('str_getcsv', file($csvUrl));
+            $config = "{
                     type: 'line',
                     data: {
                         labels: [";
 
-        for ($i=1; $i < count($csv_array); $i++){
-            $config = $config."'".$csv_array[$i][0]."',";
-        }
+            for ($i=1; $i < count($csv_array); $i++){
+                $config = $config."'".$csv_array[$i][0]."',";
+            }
 
-        $config = $config."],
+            $config = $config."],
                         datasets: [";
 
-        for ($i=1; $i < count($csv_array[0]); $i++){
-            $config = $config."{
+            for ($i=1; $i < count($csv_array[0]); $i++){
+                $config = $config."{
                             label: '".$csv_array[0][$i]."',
                             backgroundColor: colors[".$i."],
                             borderColor: colors[".$i."],
                             data: [";
 
-           for ($j=1; $j < count($csv_array); $j++){
-                $config = $config.$csv_array[$j][$i].",";
-            }
+                for ($j=1; $j < count($csv_array); $j++){
+                    $config = $config.$csv_array[$j][$i].",";
+                }
 
-            $config = $config."],
+                $config = $config."],
                             fill: false,
                         },";
-        }
+            }
 
-        $config = $config."                        ]
-
+            $config = $config."                        ]
                     },
             options: {
                 responsive: true,
@@ -82,6 +81,9 @@ class ResultsController extends Controller
                 }
             }
                 }";
+
+        }
+        else $config = "";
 
         return view('experiment.results',
             ['project_id' => $id, 'experiment_id' => $experiment_id, 'config' => $config]);

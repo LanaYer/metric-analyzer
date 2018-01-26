@@ -14,7 +14,11 @@
     <div class="container">
         <div class="row">
 
-                <canvas id="canvas"></canvas>
+            @if ($config=="")
+                CSV файл не найден
+            @endif
+
+            <canvas id="canvas"></canvas>
 
             <script>
                 var colors =
