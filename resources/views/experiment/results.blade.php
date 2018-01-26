@@ -25,7 +25,7 @@
                     'rgb(153, 102, 255)', //purple
                     'rgb(201, 203, 207)']; //grey
 
-                var config = <?php echo $json;?>;
+                var config = <?php echo $config;?>;
 
                 window.onload = function() {
                     var ctx = document.getElementById("canvas").getContext("2d");
