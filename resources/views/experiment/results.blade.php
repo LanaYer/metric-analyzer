@@ -28,8 +28,8 @@
                         'rgb(54, 162, 235)', //blue
                         'rgb(75, 192, 192)', //green
                         'rgb(255, 205, 86)', //yellow
-                        'rgb(255, 159, 64)', //orange
                         'rgb(153, 102, 255)', //purple
+                        'rgb(255, 159, 64)', //orange
                         'rgb(201, 203, 207)']; //grey
 
                 var config = <?php echo $config;?>;
