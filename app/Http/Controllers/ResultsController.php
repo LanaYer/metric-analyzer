@@ -25,7 +25,7 @@ class ResultsController extends Controller
                         labels: [";
 
         for ($i=1; $i < count($csv_array); $i++){
-            $config = $config.$csv_array[$i][0].",";
+            $config = $config."'".$csv_array[$i][0]."',";
         }
 
         $config = $config."],
@@ -50,9 +50,37 @@ class ResultsController extends Controller
         $config = $config."                        ]
 
                     },
-                    options: {
-                        responsive: true
-                    }
+            options: {
+                responsive: true,
+                title:{
+                    display:true,
+                    text:'Эксперимент 1'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Дата'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Количество посетителей'
+                        }
+                    }]
+                }
+            }
                 }";
 
         return view('experiment.results',
