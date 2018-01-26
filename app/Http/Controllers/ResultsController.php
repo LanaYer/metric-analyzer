@@ -31,11 +31,11 @@ class ResultsController extends Controller
         $config = $config."],
                         datasets: [";
 
-        for ($i=1; $i < 4; $i++){
-            $config = $config."                            {
-                            label: 'My First dataset',
-                            backgroundColor: colors[5],
-                            borderColor: colors[5],
+        for ($i=1; $i < count($csv_array[0]); $i++){
+            $config = $config."{
+                            label: '".$csv_array[0][$i]."',
+                            backgroundColor: colors[".$i."],
+                            borderColor: colors[".$i."],
                             data: [";
 
            for ($j=1; $j < count($csv_array); $j++){
