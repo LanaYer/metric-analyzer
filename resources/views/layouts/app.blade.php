@@ -18,6 +18,8 @@
     <link href="{{ asset('css/metric.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
 
+    <script src="{{ asset('js/Chart.js/Chart.bundle.js')}}"></script>
+    <script src="{{ asset('js/Chart.js/utils.js')}}"></script>
 </head>
 
 <body>
