@@ -36,6 +36,27 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('ym_token') ? ' has-error' : '' }}">
+                                <label for="ym_token" class="col-md-2 control-label">Страницы</label>
+
+                                <div class="col-md-10">
+                                    <select multiple="multiple" id="js-example-basic-multiple" name="pages[]">
+                                        @foreach($pages as $page)
+                                            @if (in_array($page->id, $pagesSegments))
+                                                <option value="{{$page->id}}" selected="selected">{{$page->name}}</option>
+                                            @else
+                                                <option value="{{$page->id}}">{{$page->name}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $('#js-example-basic-multiple').select2();
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-12 text-center">
                                     <button type="submit" class="btn btn-primary">
