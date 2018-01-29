@@ -17,7 +17,6 @@ class CreateSegmentsTable extends Migration
             $table->increments('id');
             $table->integer('project_id')->unsigned();
             $table->string('name');
-            $table->text('pages');
             $table->timestamps();
         });
         Schema::table('segments', function (Blueprint $table) {

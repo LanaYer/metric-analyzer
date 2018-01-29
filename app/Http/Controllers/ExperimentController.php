@@ -23,8 +23,17 @@ class ExperimentController extends Controller
         $experiment = Experiment::where('id', $experiment_id)->get();
         $segments = Segment::where('project_id', $id)->get();
 
+        $expSegm= ExperimentSegment::where('experiment_id', $experiment_id)->get();
+
+        $experimentSegments = array();
+
+        foreach ($expSegm as $expSegmItem){
+            array_push($experimentSegments, $expSegmItem->segment_id);
+        }
+
         return view('experiment.update',
-            ['experiment' => $experiment, 'segments' => $segments, 'project_id' => $id]);
+            ['experiment' => $experiment, 'segments' => $segments, 'project_id' => $id,
+                'experimentSegments' => $experimentSegments]);
     }
 
     public function add_form($id)

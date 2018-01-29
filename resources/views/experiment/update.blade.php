@@ -79,8 +79,12 @@
 
                                 <div class="col-md-10">
                                     <select multiple="multiple" id="js-example-basic-multiple" name="segments[]">
-                                        @foreach($segments as $segment)
-                                            <option value="{{$segment->id}}">{{$segment->name}}</option>
+                                    @foreach($segments as $segment)
+                                            @if (in_array($segment->id, $experimentSegments))
+                                                 <option value="{{$segment->id}}" selected="selected">{{$segment->name}}</option>
+                                            @else
+                                                 <option value="{{$segment->id}}">{{$segment->name}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                     <script>
