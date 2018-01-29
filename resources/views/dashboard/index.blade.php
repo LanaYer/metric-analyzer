@@ -16,13 +16,16 @@
                             @else
                                 <div class="project-block">
                             @endif
-                                <div class="project-block-name">{{ $project->name }}</div>
-                                <div class="project-block-options">
-                                    <a href="/dashboard/project/{{ $project->id }}/segment">Сегменты</a>
-                                    <a href="/dashboard/project/{{ $project->id }}/experiment">Эксперименты</a>
+                                <div class="project-block-name">
+                                    {{ $project->name }}
                                     <a class="project-block-options-update" href="/dashboard/project/{{ $project->id }}">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a>
+                                </div>
+                                <div class="project-block-options">
+                                    <a href="/dashboard/project/{{ $project->id }}/segment">Сегменты</a>
+                                    <a href="/dashboard/project/{{ $project->id }}/experiment">Эксперименты</a>
+                                    <a href="/dashboard/project/{{ $project->id }}/page">Страницы</a>
                                 </div>
                                 <div class="project-block-date">{{ date_create($project->added_at)->Format('d.m.Y') }}</div>
                             </div>

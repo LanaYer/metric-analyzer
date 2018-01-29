@@ -36,20 +36,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
-                                <label for="page" class="col-md-2 control-label">Страница</label>
-
-                                <div class="col-md-10">
-                                    <input id="page" type="text" class="form-control" name="page" required autofocus>
-
-                                    @if ($errors->has('page'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('page') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
                             <div class="form-group">
                                 <div class="col-md-12 text-center">
                                     <button type="submit" class="btn btn-primary">

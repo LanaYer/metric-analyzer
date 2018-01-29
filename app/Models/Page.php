@@ -10,16 +10,12 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property string $pages
  */
-class Segment extends Model
+class Page extends Model
 {
     protected $fillable = [
-        'project_id', 'name'
+        'project_id', 'name', 'pages'
     ];
 
-    protected $table = 'segments';
+    protected $table = 'pages';
 
-
-    public function getPatterns() {
-        return $this->pages;
-    }
 }

@@ -32,8 +32,7 @@ class SegmentController extends Controller
     {
         Segment::create([
             'project_id' => $request->project_id,
-            'name' => $request->name,
-            'pages' => $request->page
+            'name' => $request->name
         ]);
         return redirect('/dashboard/project/'.$request->project_id.'/segment');
     }
@@ -43,7 +42,6 @@ class SegmentController extends Controller
         $segment = Segment::find($request->segment_id);
 
         $segment->name = $request->name;
-        $segment->pages = $request->page;
 
         $segment->save();
 

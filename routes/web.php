@@ -42,6 +42,17 @@ Route::get('/dashboard/project/{id}/segment/{segment_id}', 'SegmentController@sh
 
 Route::post('/segment-update', 'SegmentController@update')->name('segment-update');
 
+//Страницы
+Route::get('/dashboard/project/{id}/page', 'PageController@index')->name('pages');
+
+Route::get('/dashboard/project/{id}/page/add', 'PageController@add_form')->name('page-add-form');
+
+Route::post('/page-add', 'PageController@add')->name('page-add');
+
+Route::get('/dashboard/project/{id}/page/{page_id}', 'PageController@show')->name('page');
+
+Route::post('/page-update', 'PageController@update')->name('page-update');
+
 //Эксперименты
 Route::get('/dashboard/project/{id}/experiment', 'ExperimentController@index')->name('experiments');
 
