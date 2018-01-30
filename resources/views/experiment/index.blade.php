@@ -38,7 +38,7 @@
                                     <button type="button" class="btn btn-primary">Редактировать</button>
                                 </a>
                             </td>
-                            <td class="text-right">
+                            <td class="text-right table-button">
                                 <a href="/dashboard/project/{{ $project_id }}/experiment/{{ $experiment->id }}/results">
                                     <button type="button" class="btn btn-primary">Результаты</button>
                                 </a>
