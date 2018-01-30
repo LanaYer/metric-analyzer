@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
  * @package App\Models
  *
  * @property string $pages
+ *
+ * @property Page[] $pages
  */
 class Segment extends Model
 {
@@ -18,8 +20,22 @@ class Segment extends Model
 
     protected $table = 'segments';
 
+    /**
+     * Get the comments for the blog post.
+     */
+    public function pages()
+    {
+        return $this->belongsToMany(Page::class, "segment_page", "segment_id", "project_page_id");
+    }
+
 
     public function getPatterns() {
-        return $this->pages;
+        $pages = [];
+
+        foreach ($this->pages as $page) {
+            $pages[] = $page->pages;
+        }
+
+        return $pages;
     }
 }
