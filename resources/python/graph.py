@@ -61,19 +61,22 @@ def pagesByTimePeriod(df, patterns):
             pages_df = df[
                 df['enter page'].str.contains(pat)
             ].groupby('week')[['visit num']].sum()
+            pages_df.fillna(value=0, axis=1)
 
             if num == 0:
                 row_df = pd.merge(df2, pages_df, how='left', left_on='week', right_index=True)
+                row_df.fillna(0, inplace=True)
+                #print row_df
             else:
-                row_df['visit num'] = row_df['visit num'] + pd.merge(df2, pages_df, how='left', left_on='week', right_index=True)['visit num']
+                row_df2 = pd.merge(df2, pages_df, how='left', left_on='week', right_index=True)
+                row_df2.fillna(0, inplace=True)
+                row_df['visit num'] = row_df['visit num'] + row_df2['visit num']
             num = num + 1
 
         row_df = row_df.rename(index=str, columns={'visit num': row['title']})
         print row_df
         result = pd.merge(result, row_df, how='left', on='week')
 
-
-    result = result.fillna(value=0, axis=1)
     return result
 
 
