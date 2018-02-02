@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use \Illuminate\Database\Eloquent\Builder ;
 
@@ -44,4 +45,13 @@ class Project extends Model
         return config('analyzer.path_to_data') . "/" . $this->id;
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function experiments()
+    {
+        return $this->hasMany(Experiment::class);
+    }
 }

@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property string $pages
  *
- * @property Page[] $pages
  */
 class Segment extends Model
 {
