@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Segment;
 use App\Models\Experiment;
-use App\Models\ExperimentSegment;
 
 class ExperimentController extends Controller
 {
@@ -20,15 +19,13 @@ class ExperimentController extends Controller
 
     public function show($id, $experiment_id)
     {
-        $experiment = Experiment::where('id', $experiment_id)->get();
+        $experiment = Experiment::find($experiment_id);
         $segments = Segment::where('project_id', $id)->get();
-
-        $expSegm= ExperimentSegment::where('experiment_id', $experiment_id)->get();
 
         $experimentSegments = array();
 
-        foreach ($expSegm as $expSegmItem){
-            array_push($experimentSegments, $expSegmItem->segment_id);
+        foreach ($experiment->segments as $expSegmItem){
+            array_push($experimentSegments, $expSegmItem->id);
         }
 
         return view('experiment.update',
@@ -61,10 +58,8 @@ class ExperimentController extends Controller
 
         if ($request->segments){
             foreach ($request->segments as $segment){
-                ExperimentSegment::create([
-                    'experiment_id' => $experiment->id,
-                    'segment_id' => $segment,
-                ]);
+
+                $experiment->segments()->attach($segment, ['experiment_id' => $experiment->id]);
             }
         }
 
@@ -91,14 +86,12 @@ class ExperimentController extends Controller
 
         $experiment->save();
 
-        ExperimentSegment::where('experiment_id', $experiment->id)->delete();
+        $experiment->segments()->detach();
 
         if ($request->segments){
             foreach ($request->segments as $segment){
-                ExperimentSegment::create([
-                    'experiment_id' => $experiment->id,
-                    'segment_id' => $segment,
-                ]);
+
+                $experiment->segments()->attach($segment, ['experiment_id' => $experiment->id]);
             }
         }
 

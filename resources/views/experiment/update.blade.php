@@ -5,7 +5,7 @@
         <li><a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a><i class="icon-angle-right"></i></li>
         <li><a href="/dashboard/project/{{ $project_id }}">{{ $project_id }}</a><i class="icon-angle-right"></i></li>
         <li><a href="/dashboard/project/{{ $project_id }}/experiment">Эксперименты</a><i class="icon-angle-right"></i></li>
-        <li class="active">{{ $experiment[0]->id }}</li>
+        <li class="active">{{ $experiment->id }}</li>
     </ul>
 @stop
 
@@ -20,13 +20,13 @@
                         <form class="form-horizontal" method="POST" action="{{ route('experiment-update') }}">
                             {{ csrf_field() }}
 
-                            <input name="id" value="{{ $experiment[0]->id }}" hidden>
+                            <input name="id" value="{{ $experiment->id }}" hidden>
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-2 control-label">Название</label>
 
                                 <div class="col-md-10">
-                                    <input id="name" type="text" class="form-control" name="name" value="{{ $experiment[0]->name }}" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ $experiment->name }}" required autofocus>
 
                                     @if ($errors->has('name'))
                                         <span class="help-block">
@@ -40,7 +40,7 @@
                                 <label for="description" class="col-md-2 control-label">Описание</label>
 
                                 <div class="col-md-10">
-                                    <input id="description" type="text" class="form-control" name="description" value="{{ $experiment[0]->description }}" required autofocus>
+                                    <input id="description" type="text" class="form-control" name="description" value="{{ $experiment->description }}" required autofocus>
 
                                     @if ($errors->has('description'))
                                         <span class="help-block">
@@ -54,7 +54,7 @@
                                 <label for="ym_token" class="col-md-2 control-label">Abtest</label>
 
                                 <div class="col-md-10">
-                                    @if ($experiment[0]->is_abtest)
+                                    @if ($experiment->is_abtest)
                                         <input name="is_abtest" type="checkbox" checked/>
                                     @else
                                         <input name="is_abtest" type="checkbox"/>
@@ -66,7 +66,7 @@
                                 <label for="ym_token" class="col-md-2 control-label">Активен</label>
 
                                 <div class="col-md-10">
-                                    @if ($experiment[0]->is_active)
+                                    @if ($experiment->is_active)
                                         <input name="is_active" type="checkbox" checked/>
                                     @else
                                         <input name="is_active" type="checkbox"/>
@@ -79,7 +79,7 @@
 
                                 <div class="col-md-10">
                                     <select multiple="multiple" id="js-example-basic-multiple" name="segments[]">
-                                    @foreach($segments as $segment)
+                                        @foreach($segments as $segment)
                                             @if (in_array($segment->id, $experimentSegments))
                                                  <option value="{{$segment->id}}" selected="selected">{{$segment->name}}</option>
                                             @else

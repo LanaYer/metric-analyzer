@@ -16,12 +16,12 @@ class CreateSegmentsPagesTable extends Migration
         Schema::create('segment_page', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('segment_id')->unsigned();
-            $table->integer('project_page_id')->unsigned();
+            $table->integer('page_id')->unsigned();
             $table->timestamps();
         });
         Schema::table('segment_page', function (Blueprint $table) {
             $table->foreign('segment_id')->references('id')->on('segments');
-            $table->foreign('project_page_id')->references('id')->on('pages');
+            $table->foreign('page_id')->references('id')->on('pages');
         });
     }
 

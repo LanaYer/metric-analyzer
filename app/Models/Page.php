@@ -18,4 +18,9 @@ class Page extends Model
 
     protected $table = 'pages';
 
+    public function segments()
+    {
+        return $this->belongsToMany('App\Models\Segment', 'segment_page');
+    }
+
 }

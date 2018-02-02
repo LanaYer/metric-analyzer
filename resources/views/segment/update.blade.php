@@ -5,7 +5,7 @@
         <li><a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a><i class="icon-angle-right"></i></li>
         <li><a href="/dashboard/project/{{ $project_id }}">{{ $project_id }}</a><i class="icon-angle-right"></i></li>
         <li><a href="/dashboard/project/{{ $project_id }}/segment">Сегменты</a><i class="icon-angle-right"></i></li>
-        <li class="active">{{ $segment[0]->id }}</li>
+        <li class="active">{{ $segment->id }}</li>
     </ul>
 @stop
 
@@ -20,13 +20,13 @@
                         <form class="form-horizontal" method="POST" action="{{ route('segment-update') }}">
                             {{ csrf_field() }}
 
-                            <input name="segment_id" value="{{$segment[0]->id}}" hidden>
+                            <input name="segment_id" value="{{$segment->id}}" hidden>
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-2 control-label">Название</label>
 
                                 <div class="col-md-10">
-                                    <input id="name" type="text" class="form-control" value="{{$segment[0]->name}}" name="name" required autofocus>
+                                    <input id="name" type="text" class="form-control" value="{{$segment->name}}" name="name" required autofocus>
 
                                     @if ($errors->has('name'))
                                         <span class="help-block">

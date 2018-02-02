@@ -18,6 +18,15 @@ class Segment extends Model
 
     protected $table = 'segments';
 
+    public function experiments()
+    {
+        return $this->belongsToMany('App\Models\Experiment', 'experiment_segments');
+    }
+
+    public function pages()
+    {
+        return $this->belongsToMany('App\Models\Page', 'segment_page');
+    }
 
     public function getPatterns() {
         return $this->pages;

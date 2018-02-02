@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Segment;
 use Illuminate\Http\Request;
 use App\Models\Page;
-use App\Models\SegmentPage;
 
 class SegmentController extends Controller
 {
@@ -19,16 +18,13 @@ class SegmentController extends Controller
 
     public function show($id, $segment_id)
     {
-        $segment = Segment::where('id', $segment_id)->get();
-
+        $segment = Segment::find($segment_id);
         $pages = Page::where('project_id', $id)->get();
-
-        $pageSegm = SegmentPage::where('segment_id', $segment_id)->get();
 
         $pagesSegments = array();
 
-        foreach ($pageSegm as $pageSegmItem){
-            array_push($pagesSegments, $pageSegmItem->project_page_id);
+        foreach ($segment->pages as $pageSegmItem){
+            array_push($pagesSegments, $pageSegmItem->id);
         }
 
         return view('segment.update', ['segment' => $segment, 'project_id' => $id, 'pages' => $pages,
@@ -51,10 +47,8 @@ class SegmentController extends Controller
 
         if ($request->pages){
             foreach ($request->pages as $page){
-                SegmentPage::create([
-                    'segment_id' => $segment ->id,
-                    'project_page_id' => $page
-                ]);
+
+                $segment->pages()->attach($page, ['segment_id' => $segment ->id]);
             }
         }
 
@@ -69,14 +63,12 @@ class SegmentController extends Controller
 
         $segment->save();
 
-        SegmentPage::where('segment_id', $segment->id)->delete();
+        $segment->pages()->detach();
 
         if ($request->pages){
             foreach ($request->pages as $page){
-                SegmentPage::create([
-                    'segment_id' => $segment ->id,
-                    'project_page_id' => $page
-                ]);
+
+                $segment->pages()->attach($page, ['segment_id' => $segment ->id]);
             }
         }
 

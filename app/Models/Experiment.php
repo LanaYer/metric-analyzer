@@ -35,7 +35,7 @@ class Experiment extends Model
      */
     public function segments()
     {
-        return $this->belongsToMany(Segment::class, "experiment_segments");
+        return $this->belongsToMany('App\Models\Segment', 'experiment_segments');
     }
 
     /**
