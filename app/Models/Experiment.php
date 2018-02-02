@@ -73,7 +73,7 @@ class Experiment extends Model
     {
         $json = ['patterns' => []];
         foreach ($this->segments as $segment) {
-            $json['patterns'][] = ['title' => $segment->name, 'patterns' => [$segment->getPatterns()]];
+            $json['patterns'][] = ['title' => $segment->name, 'patterns' => $segment->getPatterns()];
         }
 
         return \file_put_contents(
