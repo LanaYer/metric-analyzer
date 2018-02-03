@@ -4,7 +4,7 @@
     display: inline-block;
     background: #fff;
 }
-.navbar, .dropdown-menu{
+.navbar, .metric-dropdown{
     background: #0271ab!important;
 }
 .navbar a{

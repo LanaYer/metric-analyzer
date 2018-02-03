@@ -26,25 +26,27 @@
                                 <label for="description" class="col-md-2 control-label">Описание</label>
 
                                 <div class="col-md-10">
-                                    <input id="description" type="text" class="form-control" name="description" required autofocus>
+                                    <textarea id="description" type="text" class="form-control" name="description" required autofocus>
 
                                     @if ($errors->has('description'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>
                                     </span>
                                     @endif
+                                    </textarea>
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('start_at') ? ' has-error' : '' }}">
+                                <label for="start_at" class="col-md-2 control-label">Дата начала</label>
 
-                            <div class="form-group">
-                                <label for="dtp_input2" class="col-md-2 control-label">Date Picking</label>
-                                <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                    <input class="form-control" size="16" type="text" value="" readonly>
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                <div class="col-md-10">
+                                    <div class="input-group date start_at col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="start_at" data-link-format="yyyy-mm-dd">
+                                        <input class="form-control" size="16" type="text" value="" readonly>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                    <input type="hidden" id="start_at" name="start_at" value="" /><br/>
                                 </div>
-                                <input type="hidden" id="dtp_input2" value="" /><br/>
                             </div>
 
                             <div class="form-group">
@@ -68,15 +70,12 @@
 @section('js')
     <script type="text/javascript">
 
-        $('.form_date').datetimepicker({
-            language:  'fr',
-            weekStart: 1,
+        $('.start_at').datetimepicker({
+            language:  'ru',
             todayBtn:  1,
             autoclose: 1,
-            todayHighlight: 1,
             startView: 2,
-            minView: 2,
-            forceParse: 0
+            minView: 2
         });
     </script>
 @endsection
