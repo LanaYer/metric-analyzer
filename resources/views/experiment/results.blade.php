@@ -46,3 +46,9 @@
         </div>
     </div>
 @endsection
+
+@section('js')
+    <script src="{{ asset('js/Chart.js/Chart.bundle.js')}}"></script>
+    <script src="{{ asset('js/Chart.js/chartjs-plugin-annotation.js')}}"></script>
+    <script src="{{ asset('js/Chart.js/utils.js')}}"></script>
+@endsection

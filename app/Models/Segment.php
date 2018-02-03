@@ -22,12 +22,12 @@ class Segment extends Model
 
     public function experiments()
     {
-        return $this->belongsToMany('App\Models\Experiment', 'experiment_segments');
+        return $this->belongsToMany(Experiment::class, 'experiment_segments');
     }
 
     public function pages()
     {
-        return $this->belongsToMany('App\Models\Page', 'segment_page');
+        return $this->belongsToMany(Page::class, 'segment_page');
     }
 
     /**

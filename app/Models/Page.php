@@ -20,7 +20,7 @@ class Page extends Model
 
     public function segments()
     {
-        return $this->belongsToMany('App\Models\Segment', 'segment_page');
+        return $this->belongsToMany(Segment::class, 'segment_page');
     }
 
 }

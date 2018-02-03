@@ -47,13 +47,29 @@ class ResultsController extends Controller
                         },";
             }
 
-            $config = $config."                        ]
+            $config = $config." ]
                     },
             options: {
                 responsive: true,
                 title:{
                     display:true,
                     text:'Эксперимент 1'
+                },
+                annotation: {
+                    annotations: [
+                          {
+                                type: \"line\",
+                                mode: \"vertical\",
+                                scaleID: \"x-axis-0\",
+                                value: \"2017-07-10\",
+                                borderColor: \"red\",
+                                    label: {
+                                      content: \"TODAY\",
+                                      enabled: true,
+                                      position: \"top\"
+                                    }
+                          }
+                    ]
                 },
                 tooltips: {
                     mode: 'index',

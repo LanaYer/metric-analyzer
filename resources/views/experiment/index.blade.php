@@ -39,6 +39,11 @@
                                 </a>
                             </td>
                             <td class="text-right table-button">
+                                 <a href="/dashboard/project/{{ $project_id }}/experiment/{{ $experiment->id }}/step">
+                                     <button type="button" class="btn btn-primary">Этапы</button>
+                                 </a>
+                            </td>
+                            <td class="text-right table-button">
                                 <a href="/dashboard/project/{{ $project_id }}/experiment/{{ $experiment->id }}/results">
                                     <button type="button" class="btn btn-primary">Результаты</button>
                                 </a>
