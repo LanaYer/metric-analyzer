@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Segment;
 use App\Models\Experiment;
-use App\Models\ExperimentSegment;
+use App\Models\Step;
 
 
 class ResultsController extends Controller
@@ -13,6 +13,8 @@ class ResultsController extends Controller
     public function index($id, $experiment_id)
     {
         $experiment = Experiment::where('id', $experiment_id)->first()->getGraphs();
+
+        $steps = Step::where('experiment_id', $experiment_id)->get();
 
         $csvUrl = $experiment['visits']['data'];
 
@@ -56,20 +58,19 @@ class ResultsController extends Controller
                     text:'Эксперимент 1'
                 },
                 annotation: {
-                    annotations: [
-                          {
-                                type: \"line\",
-                                mode: \"vertical\",
-                                scaleID: \"x-axis-0\",
-                                value: \"2017-07-10\",
-                                borderColor: \"red\",
-                                    label: {
-                                      content: \"TODAY\",
-                                      enabled: true,
-                                      position: \"top\"
-                                    }
-                          }
-                    ]
+                    annotations: [";
+
+            foreach ($steps as $step){
+                $config = $config."{
+                                type: 'line',
+                                mode: 'vertical',
+                                scaleID: 'x-axis-0',
+                                value: '".$step->start_at."',
+                                borderColor: 'gray',
+                          },";
+            }
+
+            $config = $config."]
                 },
                 tooltips: {
                     mode: 'index',
@@ -102,7 +103,7 @@ class ResultsController extends Controller
         else $config = "";
 
         return view('experiment.results',
-            ['project_id' => $id, 'experiment_id' => $experiment_id, 'config' => $config]);
+            ['project_id' => $id, 'experiment_id' => $experiment_id, 'config' => $config, 'steps' => $steps]);
     }
 }
 

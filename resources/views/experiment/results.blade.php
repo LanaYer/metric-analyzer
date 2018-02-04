@@ -12,7 +12,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="col-md-9">
 
             @if ($config=="")
                 CSV файл не найден
@@ -43,6 +43,13 @@
 
             </script>
 
+        </div>
+
+        <div class="col-md-3">
+            <h3>Даты начала этапов</h3>
+            @foreach($steps as $step)
+                <p>{{$step->start_at}}</p>
+            @endforeach
         </div>
     </div>
 @endsection

@@ -34,26 +34,18 @@ class StepController extends Controller
 
     public function add_form($id, $experiment_id)
     {
-        $pages = Page::where('project_id', $id)->get();
-
-        return view('steps.add', ['project_id' => $id, 'pages' => $pages, 'experiment_id' => $experiment_id]);
+        return view('steps.add', ['project_id' => $id, 'experiment_id' => $experiment_id]);
     }
 
     public function add(Request $request)
     {
-        $segment = Segment::create([
-            'project_id' => $request->project_id,
-            'name' => $request->name
+        $segment = Step::create([
+            'experiment_id' => $request->experiment_id,
+            'description' => $request->description,
+            'start_at' => $request->start_at
         ]);
 
-        if ($request->pages){
-            foreach ($request->pages as $page){
-
-                $segment->pages()->attach($page, ['segment_id' => $segment ->id]);
-            }
-        }
-
-        return redirect('/dashboard/project/'.$request->project_id.'/segment');
+        return redirect('/dashboard/project/'.$request->project_id.'/experiment/'.$request->experiment_id.'/step');
     }
 
     public function update(Request $request)

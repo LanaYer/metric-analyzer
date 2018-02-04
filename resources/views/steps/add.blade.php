@@ -5,6 +5,7 @@
         <li><a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a><i class="icon-angle-right"></i></li>
         <li><a href="/dashboard/project/{{ $project_id }}">{{ $project_id }}</a><i class="icon-angle-right"></i></li>
         <li><a href="/dashboard/project/{{ $project_id }}/experiment">Эксперимент {{ $experiment_id }}</a><i class="icon-angle-right"></i></li>
+        <li><a href="/dashboard/project/{{ $project_id }}/experiment/{{ $experiment_id }}/step">Этапы</a><i class="icon-angle-right"></i></li>
         <li class="active">Новый этап</li>
     </ul>
 @stop
@@ -21,6 +22,7 @@
                             {{ csrf_field() }}
 
                             <input name="experiment_id" value="{{ $experiment_id }}" hidden>
+                            <input name="project_id" value="{{ $project_id }}" hidden>
 
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                 <label for="description" class="col-md-2 control-label">Описание</label>
@@ -54,7 +56,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Создать
                                     </button>
-                                    <a href="/dashboard/project/{{ $project_id }}/segment">
+                                    <a href="/dashboard/project/{{ $project_id }}/experiment">
                                         <button type="button" class="btn btn-secondary">Отмена</button>
                                     </a>
                                 </div>
