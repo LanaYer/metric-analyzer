@@ -17,19 +17,11 @@ class StepController extends Controller
         return view('steps.index', ['steps' => $steps, 'project_id' => $id, 'experiment_id' => $experiment_id]);
     }
 
-    public function show($id, $segment_id)
+    public function show($id, $experiment_id, $step_id)
     {
-        $segment = Segment::find($segment_id);
-        $pages = Page::where('project_id', $id)->get();
+        $step = Step::find($step_id);
 
-        $pagesSegments = array();
-
-        foreach ($segment->pages as $pageSegmItem){
-            array_push($pagesSegments, $pageSegmItem->id);
-        }
-
-        return view('steps.update', ['segment' => $segment, 'project_id' => $id, 'pages' => $pages,
-            'pagesSegments' => $pagesSegments ]);
+        return view('steps.update', ['step' => $step, 'project_id' => $id, 'experiment_id' => $experiment_id]);
     }
 
     public function add_form($id, $experiment_id)
@@ -50,21 +42,14 @@ class StepController extends Controller
 
     public function update(Request $request)
     {
-        $segment = Segment::find($request->segment_id);
+        $step = Step::find($request->step_id);
 
-        $segment->name = $request->name;
+        $step->description = $request->description;
 
-        $segment->save();
+        $step->start_at = $request->start_at;
 
-        $segment->pages()->detach();
+        $step->save();
 
-        if ($request->pages){
-            foreach ($request->pages as $page){
-
-                $segment->pages()->attach($page, ['segment_id' => $segment ->id]);
-            }
-        }
-
-        return redirect('/dashboard/project/'.$segment->project_id.'/segment');
+        return redirect('/dashboard/project/'.$request->project_id.'/experiment/'.$request->experiment_id.'/step');
     }
 }
