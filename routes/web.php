@@ -17,63 +17,152 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/dashboard', [
+    'middleware' => 'auth',
+    'uses' => 'DashboardController@index'
+])->name('dashboard');
 
-//Создание проекта
+
+/*
+    Создание проекта
+*/
 Route::get('/dashboard/project/add', function () {
     return view('project.add');
-});
+})->middleware('auth');
 
-Route::post('/project-add', 'ProjectController@add')->name('project-add');
+Route::post('/project-add', [
+    'middleware' => 'auth',
+    'uses' => 'ProjectController@add'
+])->name('project-add');
 
-// Редактирование проекта
+
+/*
+    Редактирование проекта
+*/
 Route::get('/dashboard/project/{id}', 'ProjectController@index')->name('project');
 
 Route::post('/project-update', 'ProjectController@update')->name('project-update');
 
-//Сегменты
-Route::get('/dashboard/project/{id}/segment', 'SegmentController@index')->name('segments');
 
-Route::get('/dashboard/project/{id}/segment/add', 'SegmentController@add_form')->name('segment-add-form');
+/*
+    Сегменты
+*/
+Route::group(['prefix' => '/dashboard/project/{id}/segment'], function () {
 
-Route::post('/segment-add', 'SegmentController@add')->name('segment-add');
+    Route::get('/', [
+        'middleware' => 'auth',
+        'uses' => 'SegmentController@index'
+    ])->name('segments');
 
-Route::get('/dashboard/project/{id}/segment/{segment_id}', 'SegmentController@show')->name('segment');
+    Route::get('/add', [
+        'middleware' => 'auth',
+        'uses' => 'SegmentController@add_form'
+    ])->name('segment-add-form');
 
-Route::post('/segment-update', 'SegmentController@update')->name('segment-update');
+    Route::get('/{segment_id}', [
+        'middleware' => 'auth',
+        'uses' => 'SegmentController@show'
+    ])->name('segment');
 
-//Этапы эксперимента
-Route::get('/dashboard/project/{id}/experiment/{experiment_id}/step', 'StepController@index')->name('steps');
+});
 
-Route::get('/dashboard/project/{id}/experiment/{experiment_id}/step/add', 'StepController@add_form')->name('step-add-form');
+Route::post('/segment-add', ['middleware' => 'auth', 'uses' => 'SegmentController@add'])
+    ->name('segment-add');
 
-Route::post('/step-add', 'StepController@add')->name('step-add');
+Route::post('/segment-update',[ 'middleware' => 'auth', 'uses' => 'SegmentController@update'])
+    ->name('segment-update');
 
-Route::get('/dashboard/project/{id}/experiment/{experiment_id}/step/{step_id}', 'StepController@show')->name('step');
 
-Route::post('/step-update', 'StepController@update')->name('step-update');
+/*
+    Этапы эксперимента
+*/
+Route::group(['prefix' => '/dashboard/project/{id}/experiment/{experiment_id}/step'], function () {
 
-//Страницы
-Route::get('/dashboard/project/{id}/page', 'PageController@index')->name('pages');
+    Route::get('/', [
+        'middleware' => 'auth',
+        'uses' => 'StepController@index'
+    ])->name('segments');
 
-Route::get('/dashboard/project/{id}/page/add', 'PageController@add_form')->name('page-add-form');
+    Route::get('/add', [
+        'middleware' => 'auth',
+        'uses' => 'StepController@add_form'
+    ])->name('segment-add-form');
 
-Route::post('/page-add', 'PageController@add')->name('page-add');
+    Route::get('/{step_id}', [
+        'middleware' => 'auth',
+        'uses' => 'StepController@show'
+    ])->name('segment');
 
-Route::get('/dashboard/project/{id}/page/{page_id}', 'PageController@show')->name('page');
+});
 
-Route::post('/page-update', 'PageController@update')->name('page-update');
+Route::post('/step-add', ['middleware' => 'auth', 'uses' => 'StepController@add'])
+    ->name('step-add');
 
-//Эксперименты
-Route::get('/dashboard/project/{id}/experiment', 'ExperimentController@index')->name('experiments');
+Route::post('/step-update',[ 'middleware' => 'auth', 'uses' => 'StepController@update'])
+    ->name('step-update');
 
-Route::get('/dashboard/project/{id}/experiment/add', 'ExperimentController@add_form')->name('experiment-add-form');
 
-Route::post('/experiment-add', 'ExperimentController@add')->name('experiment-add');
+/*
+    Страницы
+*/
 
-Route::get('/dashboard/project/{id}/experiment/{experiment_id}', 'ExperimentController@show')->name('experiment');
+Route::group(['prefix' => '/dashboard/project/{id}/page'], function () {
 
-Route::post('/experiment-update', 'ExperimentController@update')->name('experiment-update');
+    Route::get('/', [
+        'middleware' => 'auth',
+        'uses' => 'PageController@index'
+    ])->name('pages');
 
-//Результаты
-Route::get('/dashboard/project/{id}/experiment/{experiment_id}/results', 'ResultsController@index')->name('results');
+    Route::get('/add', [
+        'middleware' => 'auth',
+        'uses' => 'PageController@add_form'
+    ])->name('page-add-form');
+
+    Route::get('/{page_id}', [
+        'middleware' => 'auth',
+        'uses' => 'PageController@show'
+    ])->name('page');
+
+});
+
+Route::post('/page-add', ['middleware' => 'auth', 'uses' => 'PageController@add'])
+    ->name('page-add');
+
+Route::post('/page-update',[ 'middleware' => 'auth', 'uses' => 'PageController@update'])
+    ->name('page-update');
+
+
+
+/*
+    Эксперименты
+*/
+
+Route::group(['prefix' => '/dashboard/project/{id}/experiment'], function () {
+
+    Route::get('/', [
+        'middleware' => 'auth',
+        'uses' => 'ExperimentController@index'
+    ])->name('experiments');
+
+    Route::get('/add', [
+        'middleware' => 'auth',
+        'uses' => 'ExperimentController@add_form'
+    ])->name('experiment-add-form');
+
+    Route::get('/{experiment_id}', [
+        'middleware' => 'auth',
+        'uses' => 'ExperimentController@show'
+    ])->name('experiment');
+
+    Route::get('/{experiment_id}/results', [
+        'middleware' => 'auth',
+        'uses' => 'ResultsController@index'
+    ])->name('results');
+
+});
+
+Route::post('/experiment-add', ['middleware' => 'auth', 'uses' => 'PageController@add'])
+    ->name('experiment-add');
+
+Route::post('/experiment-update',[ 'middleware' => 'auth', 'uses' => 'PageController@update'])
+    ->name('experiment-update');
