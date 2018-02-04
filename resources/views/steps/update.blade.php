@@ -6,7 +6,7 @@
         <li><a href="/dashboard/project/{{ $project_id }}">{{ $project_id }}</a><i class="icon-angle-right"></i></li>
         <li><a href="/dashboard/project/{{ $project_id }}/experiment">Эксперимент {{ $experiment_id }}</a><i class="icon-angle-right"></i></li>
         <li><a href="/dashboard/project/{{ $project_id }}/experiment/{{ $experiment_id }}/step">Этапы</a><i class="icon-angle-right"></i></li>
-        <li class="active">{{$step->id}}</li>
+        <li class="active">Этап {{$step->id}}</li>
     </ul>
 @stop
 

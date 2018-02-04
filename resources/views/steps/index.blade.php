@@ -3,7 +3,7 @@
 @section('breadcrumbs')
     <ul class="breadcrumb">
         <li><a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a><i class="icon-angle-right"></i></li>
-        <li><a href="/dashboard/project/{{ $project_id }}">{{ $project_id }}</a><i class="icon-angle-right"></i></li>
+        <li><a href="/dashboard/project/{{ $project_id }}">Проект {{ $project_id }}</a><i class="icon-angle-right"></i></li>
         <li><a href="/dashboard/project/{{ $project_id }}/experiment">Эксперимент {{ $experiment_id }}</a><i class="icon-angle-right"></i></li>
         <li class="active">Этапы</li>
     </ul>

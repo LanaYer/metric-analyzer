@@ -74,35 +74,6 @@ Route::post('/segment-update',[ 'middleware' => 'auth', 'uses' => 'SegmentContro
 
 
 /*
-    Этапы эксперимента
-*/
-Route::group(['prefix' => '/dashboard/project/{id}/experiment/{experiment_id}/step'], function () {
-
-    Route::get('/', [
-        'middleware' => 'auth',
-        'uses' => 'StepController@index'
-    ])->name('segments');
-
-    Route::get('/add', [
-        'middleware' => 'auth',
-        'uses' => 'StepController@add_form'
-    ])->name('segment-add-form');
-
-    Route::get('/{step_id}', [
-        'middleware' => 'auth',
-        'uses' => 'StepController@show'
-    ])->name('segment');
-
-});
-
-Route::post('/step-add', ['middleware' => 'auth', 'uses' => 'StepController@add'])
-    ->name('step-add');
-
-Route::post('/step-update',[ 'middleware' => 'auth', 'uses' => 'StepController@update'])
-    ->name('step-update');
-
-
-/*
     Страницы
 */
 
@@ -159,10 +130,37 @@ Route::group(['prefix' => '/dashboard/project/{id}/experiment'], function () {
         'uses' => 'ResultsController@index'
     ])->name('results');
 
+    /*
+    Этапы эксперимента
+*/
+    Route::group(['prefix' => '/{experiment_id}/step'], function () {
+
+        Route::get('/', [
+            'middleware' => 'auth',
+            'uses' => 'StepController@index'
+        ])->name('steps');
+
+        Route::get('/add', [
+            'middleware' => 'auth',
+            'uses' => 'StepController@add_form'
+        ])->name('step-add-form');
+
+        Route::get('/{step_id}', [
+            'middleware' => 'auth',
+            'uses' => 'StepController@show'
+        ])->name('step');
+
+    });
 });
 
-Route::post('/experiment-add', ['middleware' => 'auth', 'uses' => 'PageController@add'])
+Route::post('/experiment-add', ['middleware' => 'auth', 'uses' => 'ExperimentController@add'])
     ->name('experiment-add');
 
-Route::post('/experiment-update',[ 'middleware' => 'auth', 'uses' => 'PageController@update'])
+Route::post('/experiment-update',[ 'middleware' => 'auth', 'uses' => 'ExperimentController@update'])
     ->name('experiment-update');
+
+Route::post('/step-add', ['middleware' => 'auth', 'uses' => 'StepController@add'])
+    ->name('step-add');
+
+Route::post('/step-update',[ 'middleware' => 'auth', 'uses' => 'StepController@update'])
+    ->name('step-update');

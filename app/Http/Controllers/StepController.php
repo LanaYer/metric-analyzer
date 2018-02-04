@@ -10,9 +10,9 @@ use App\Models\Segment;
 class StepController extends Controller
 {
 
-    public function index($experiment_id, $id)
+    public function index($id, $experiment_id)
     {
-        $steps = Step::where('experiment_id', $experiment_id)->orderBy('id', 'DESC')->get();
+        $steps = Step::where('experiment_id', $id)->orderBy('id', 'DESC')->get();
 
         return view('steps.index', ['steps' => $steps, 'project_id' => $id, 'experiment_id' => $experiment_id]);
     }
@@ -43,6 +43,8 @@ class StepController extends Controller
     public function update(Request $request)
     {
         $step = Step::find($request->step_id);
+
+        $step->experiment_id = $request->experiment_id;
 
         $step->description = $request->description;
 
