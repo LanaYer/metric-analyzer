@@ -102,3 +102,10 @@
     border-bottom: 1px solid #0281c6;
     margin-bottom: 15px;
 }
+.result_page-steps span{
+    font-weight: 700;
+}
+.result_page-steps h4{
+    font-weight: 700;
+    font-size: 14px;
+}

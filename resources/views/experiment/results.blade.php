@@ -45,10 +45,10 @@
 
         </div>
 
-        <div class="col-md-3">
-            <h3>Даты начала этапов</h3>
+        <div class="col-md-3 result_page-steps">
+            <h4>Этапы</h4>
             @foreach($steps as $step)
-                <p>{{$step->start_at}}</p>
+                <p><span>{{$step->start_at}}</span> - {{$step->description}}</p>
             @endforeach
         </div>
     </div>
