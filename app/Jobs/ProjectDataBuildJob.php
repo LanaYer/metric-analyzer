@@ -23,9 +23,15 @@ class ProjectDataBuildJob implements ShouldQueue
      */
     private $projectId;
 
-    public function __construct($projectId = null)
+    /**
+     * @var int
+     */
+    private $experimentId;
+
+    public function __construct($projectId = null, $experimentId = null)
     {
         $this->projectId = $projectId;
+        $this->experimentId = $experimentId;
     }
 
     /**
@@ -93,9 +99,15 @@ class ProjectDataBuildJob implements ShouldQueue
         /**
          * @var Experiment[] $experiments
          */
-        $experiments = Experiment::where('project_id', '=', $project->id)
-            ->active()
-            ->get();
+        if (!$this->experimentId) {
+            $experiments = Experiment::where('project_id', '=', $project->id)
+                ->active()
+                ->get();
+        } else {
+            $experiments = Experiment::where('id', '=', $this->experimentId)
+                ->get();
+        }
+
 
 
         echo PHP_EOL . "---- обрабатываем эксперименты-----" . PHP_EOL;
@@ -112,7 +124,7 @@ class ProjectDataBuildJob implements ShouldQueue
                 foreach ($graphs as $name => $params) {
                     $cmd = 'cd ' . resource_path() . "/python && python graph.py -d ".$project->getDataDir()." -c visits -m ".$name." -e " . $experiment->id;
                     echo "              " . $cmd.PHP_EOL;
-                    $process = new Process($cmd);
+                    $process = new Process($cmd, null, null, null, null);
                     $process->run();
 
                     // executes after the command finishes

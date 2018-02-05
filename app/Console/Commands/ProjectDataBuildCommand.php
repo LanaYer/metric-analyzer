@@ -12,7 +12,7 @@ class ProjectDataBuildCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'data:build {--projectId=}';
+    protected $signature = 'data:build {--projectId=} {--experimentId=}';
 
     /**
      * The console command description.
@@ -39,9 +39,11 @@ class ProjectDataBuildCommand extends Command
     public function handle()
     {
         $projectId  = $this->option('projectId');
+        $experimentId  = $this->option('experimentId');
 
         $job = app(ProjectDataBuildJob::class, [
             'projectId'  => $projectId,
+            'experimentId'  => $experimentId,
         ]);
 
         dispatch($job);
