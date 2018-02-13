@@ -5,16 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Segment;
 use App\Models\Experiment;
+use App\Models\Project;
 
 class ExperimentController extends Controller
 {
 
-    public function index($id)
+    public function index(Project $project)
     {
-        $experiments = Experiment::where('project_id', $id)->orderBy('id', 'DESC')->get();
-
-        return view('experiment.index',
-            ['experiments' => $experiments, 'project_id' => $id]);
+        return view('experiment.index', ['project' => $project]);
     }
 
     public function show($id, $experiment_id)

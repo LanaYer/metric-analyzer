@@ -108,7 +108,7 @@ Route::post('/page-update',[ 'middleware' => 'auth', 'uses' => 'PageController@u
     Эксперименты
 */
 
-Route::group(['prefix' => '/dashboard/project/{id}/experiment'], function () {
+Route::group(['prefix' => '/dashboard/project/{project}/experiment'], function () {
 
     Route::get('/', [
         'middleware' => 'auth',
