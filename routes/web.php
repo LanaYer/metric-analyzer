@@ -36,9 +36,9 @@ Route::post('/project-add', [
 ])->name('project-add');
 
 
-/*
-    Редактирование проекта
-*/
+/**
+ *   Редактирование проекта
+ */
 Route::get('/dashboard/project/{id}', 'ProjectController@index')->name('project');
 
 Route::post('/project-update', 'ProjectController@update')->name('project-update');
