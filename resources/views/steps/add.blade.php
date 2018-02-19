@@ -3,9 +3,9 @@
 @section('breadcrumbs')
     <ul class="breadcrumb">
         <li><a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a><i class="icon-angle-right"></i></li>
-        <li><a href="/dashboard/project/{{ $project_id }}">{{ $project_id }}</a><i class="icon-angle-right"></i></li>
-        <li><a href="/dashboard/project/{{ $project_id }}/experiment">Эксперимент {{ $experiment_id }}</a><i class="icon-angle-right"></i></li>
-        <li><a href="/dashboard/project/{{ $project_id }}/experiment/{{ $experiment_id }}/step">Этапы</a><i class="icon-angle-right"></i></li>
+        <li><a href="/dashboard/project/{{ $project->id  }}">{{ $project->id  }}</a><i class="icon-angle-right"></i></li>
+        <li><a href="/dashboard/project/{{ $project->id  }}/experiment">Эксперимент {{ $experiment->id }}</a><i class="icon-angle-right"></i></li>
+        <li><a href="/dashboard/project/{{ $project->id  }}/experiment/{{ $experiment->id }}/step">Этапы</a><i class="icon-angle-right"></i></li>
         <li class="active">Новый этап</li>
     </ul>
 @stop
@@ -21,8 +21,8 @@
                         <form class="form-horizontal" method="POST" action="{{ route('step-add') }}">
                             {{ csrf_field() }}
 
-                            <input name="experiment_id" value="{{ $experiment_id }}" hidden>
-                            <input name="project_id" value="{{ $project_id }}" hidden>
+                            <input name="experiment_id" value="{{ $experiment->id }}" hidden>
+                            <input name="project_id" value="{{ $project->id  }}" hidden>
 
                             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                 <label for="description" class="col-md-2 control-label">Описание</label>
@@ -56,7 +56,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Создать
                                     </button>
-                                    <a href="/dashboard/project/{{ $project_id }}/experiment">
+                                    <a href="/dashboard/project/{{ $project->id  }}/experiment">
                                         <button type="button" class="btn btn-secondary">Отмена</button>
                                     </a>
                                 </div>

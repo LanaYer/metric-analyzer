@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Page;
+use App\Models\Project;
+use App\Models\Experiment;
 use App\Models\Step;
-use App\Models\Segment;
 
 class StepController extends Controller
 {

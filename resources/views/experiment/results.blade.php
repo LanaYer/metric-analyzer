@@ -3,9 +3,9 @@
 @section('breadcrumbs')
     <ul class="breadcrumb">
         <li><a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a><i class="icon-angle-right"></i></li>
-        <li><a href="/dashboard/project/{{ $project_id }}">{{ $project_id }}</a><i class="icon-angle-right"></i></li>
-        <li><a href="/dashboard/project/{{ $project_id }}/experiment">Эксперименты</a><i class="icon-angle-right"></i></li>
-        <li><a href="/dashboard/project/{{ $project_id }}/experiment/{{ $experiment_id }}">{{ $experiment_id }}</a></li>
+        <li><a href="/dashboard/project/{{ $project->id  }}">{{ $project->id  }}</a><i class="icon-angle-right"></i></li>
+        <li><a href="/dashboard/project/{{ $project->id  }}/experiment">Эксперименты</a><i class="icon-angle-right"></i></li>
+        <li><a href="/dashboard/project/{{ $project->id  }}/experiment/{{ $experiment->id }}">{{ $experiment->id }}</a></li>
         <li class="active">Результаты</li>
     </ul>
 @stop
@@ -47,7 +47,7 @@
 
         <div class="col-md-3 result_page-steps">
             <h4>Этапы</h4>
-            @foreach($steps as $step)
+            @foreach($experiment->steps as $step)
                 <p><span>{{$step->start_at}}</span> - {{$step->description}}</p>
             @endforeach
         </div>

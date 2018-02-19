@@ -3,24 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Segment;
 use App\Models\Experiment;
-use App\Models\Step;
+use App\Models\Project;
 
 
 class ResultsController extends Controller
 {
-    public function index($id, $experiment_id)
+    public function index(Project $project, Experiment $experiment)
     {
-        $experiment = Experiment::where('id', $experiment_id)->first()->getGraphs();
+        $graphs = $experiment->first()->getGraphs();
 
-        $steps = Step::where('experiment_id', $experiment_id)->get();
+        if (file_exists($graphs['visits']['data'])){
 
-        $csvUrl = $experiment['visits']['data'];
-
-        if (file_exists($csvUrl)){
-
-            $csv_array = array_map('str_getcsv', file($csvUrl));
+            $csv_array = array_map('str_getcsv', file($graphs['visits']['data']));
             $config = "{
                     type: 'line',
                     data: {
@@ -60,7 +55,7 @@ class ResultsController extends Controller
                 annotation: {
                     annotations: [";
 
-            foreach ($steps as $step){
+            foreach ($experiment->steps as $step){
                 $config = $config."{
                                 type: 'line',
                                 mode: 'vertical',
@@ -103,7 +98,7 @@ class ResultsController extends Controller
         else $config = "";
 
         return view('experiment.results',
-            ['project_id' => $id, 'experiment_id' => $experiment_id, 'config' => $config, 'steps' => $steps]);
+            ['project' => $project, 'experiment' => $experiment, 'config' => $config]);
     }
 }
 
