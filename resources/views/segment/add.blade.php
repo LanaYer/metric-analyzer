@@ -3,8 +3,8 @@
 @section('breadcrumbs')
     <ul class="breadcrumb">
         <li><a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a><i class="icon-angle-right"></i></li>
-        <li><a href="/dashboard/project/{{ $project_id }}">{{ $project_id }}</a><i class="icon-angle-right"></i></li>
-        <li><a href="/dashboard/project/{{ $project_id }}/segment">Сегменты</a><i class="icon-angle-right"></i></li>
+        <li><a href="/dashboard/project/{{ $project->id }}">{{ $project->id }}</a><i class="icon-angle-right"></i></li>
+        <li><a href="/dashboard/project/{{ $project->id }}/segment">Сегменты</a><i class="icon-angle-right"></i></li>
         <li class="active">Новый сегмент</li>
     </ul>
 @stop
@@ -20,7 +20,7 @@
                         <form class="form-horizontal" method="POST" action="{{ route('segment-add') }}">
                             {{ csrf_field() }}
 
-                            <input name="project_id" value="{{ $project_id }}" hidden>
+                            <input name="project_id" value="{{ $project->id }}" hidden>
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-2 control-label">Название</label>
@@ -37,11 +37,11 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('ym_token') ? ' has-error' : '' }}">
-                                <label for="ym_token" class="col-md-2 control-label">Сстраницы</label>
+                                <label for="ym_token" class="col-md-2 control-label">Страницы</label>
 
                                 <div class="col-md-10">
                                     <select multiple="multiple" id="js-example-basic-multiple" name="pages[]">
-                                        @foreach($pages as $page)
+                                        @foreach($project->pages as $page)
                                             <option value="{{$page->id}}">{{$page->name}}</option>
                                         @endforeach
                                     </select>
@@ -58,7 +58,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Создать
                                     </button>
-                                    <a href="/dashboard/project/{{ $project_id }}/segment">
+                                    <a href="/dashboard/project/{{ $project->id }}/segment">
                                         <button type="button" class="btn btn-secondary">Отмена</button>
                                     </a>
                                 </div>

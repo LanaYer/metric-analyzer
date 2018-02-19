@@ -9,23 +9,19 @@ use App\Models\Project;
 class PageController extends Controller
 {
 
-    public function index($id)
+    public function index(Project $project)
     {
-        $pages = Page::where('project_id', $id)->orderBy('id', 'DESC')->get();
-
-        return view('page.index', ['pages' => $pages, 'project_id' => $id]);
+        return view('page.index', ['project' => $project]);
     }
 
-    public function show($id, $page_id)
+    public function show(Project $project, Page $page)
     {
-        $page = Page::where('id', $page_id)->get();
-
-        return view('page.update', ['page' => $page, 'project_id' => $id]);
+        return view('page.update', ['page' => $page, 'project' => $project]);
     }
 
-    public function add_form($id)
+    public function add_form(Project $project)
     {
-        return view('page.add', ['project_id' => $id]);
+        return view('page.add', ['project' => $project]);
     }
 
     public function add(Request $request)

@@ -9,10 +9,8 @@ class ProjectController extends Controller
 {
     protected $redirectTo = '/home';
 
-    public function index($id)
+    public function index(Project $project)
     {
-        $project = Project::where('id', $id)->get();
-
         return view('project.update', ['project' => $project]);
     }
 

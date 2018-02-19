@@ -3,8 +3,8 @@
 @section('breadcrumbs')
     <ul class="breadcrumb">
         <li><a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a><i class="icon-angle-right"></i></li>
-        <li><a href="/dashboard/project/{{ $project_id }}">{{ $project_id }}</a><i class="icon-angle-right"></i></li>
-        <li><a href="/dashboard/project/{{ $project_id }}/segment">Сегменты</a><i class="icon-angle-right"></i></li>
+        <li><a href="/dashboard/project/{{ $project->id }}">{{ $project->id }}</a><i class="icon-angle-right"></i></li>
+        <li><a href="/dashboard/project/{{ $project->id }}/segment">Сегменты</a><i class="icon-angle-right"></i></li>
         <li class="active">{{ $segment->id }}</li>
     </ul>
 @stop
@@ -41,7 +41,7 @@
 
                                 <div class="col-md-10">
                                     <select multiple="multiple" id="js-example-basic-multiple" name="pages[]">
-                                        @foreach($pages as $page)
+                                        @foreach($project->pages as $page)
                                             @if (in_array($page->id, $pagesSegments))
                                                 <option value="{{$page->id}}" selected="selected">{{$page->name}}</option>
                                             @else
@@ -62,7 +62,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Сохранить
                                     </button>
-                                    <a href="/dashboard/project/{{ $project_id }}/segment">
+                                    <a href="/dashboard/project/{{ $project->id }}/segment">
                                         <button type="button" class="btn btn-secondary">Отмена</button>
                                     </a>
                                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\Segment;
 use Illuminate\Http\Request;
 use App\Models\Page;
@@ -9,33 +10,26 @@ use App\Models\Page;
 class SegmentController extends Controller
 {
 
-    public function index($id)
+    public function index(Project $project)
     {
-        $segments = Segment::where('project_id', $id)->orderBy('id', 'DESC')->get();
-
-        return view('segment.index', ['segments' => $segments, 'project_id' => $id]);
+        return view('segment.index', ['project' => $project]);
     }
 
-    public function show($id, $segment_id)
+    public function show(Project $project, Segment $segment)
     {
-        $segment = Segment::find($segment_id);
-        $pages = Page::where('project_id', $id)->get();
-
         $pagesSegments = array();
 
-        foreach ($segment->pages as $pageSegmItem){
+        foreach ($segment->pages() as $pageSegmItem){
             array_push($pagesSegments, $pageSegmItem->id);
         }
 
-        return view('segment.update', ['segment' => $segment, 'project_id' => $id, 'pages' => $pages,
+        return view('segment.update', ['segment' => $segment, 'project' => $project,
             'pagesSegments' => $pagesSegments ]);
     }
 
-    public function add_form($id)
+    public function add_form(Project $project)
     {
-        $pages = Page::where('project_id', $id)->get();
-
-        return view('segment.add', ['project_id' => $id, 'pages' => $pages]);
+        return view('segment.add', ['project' => $project]);
     }
 
     public function add(Request $request)

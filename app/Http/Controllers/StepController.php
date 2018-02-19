@@ -10,23 +10,19 @@ use App\Models\Segment;
 class StepController extends Controller
 {
 
-    public function index($id, $experiment_id)
+    public function index(Project $project, Experiment $experiment)
     {
-        $steps = Step::where('experiment_id', $experiment_id)->orderBy('id', 'DESC')->get();
-
-        return view('steps.index', ['steps' => $steps, 'project_id' => $id, 'experiment_id' => $experiment_id]);
+        return view('steps.index', ['steps' => $experiment->steps(), 'project' => $project, 'experiment' => $experiment]);
     }
 
-    public function show($id, $experiment_id, $step_id)
+    public function show(Project $project, Experiment $experiment, Step $step)
     {
-        $step = Step::find($step_id);
-
-        return view('steps.update', ['step' => $step, 'project_id' => $id, 'experiment_id' => $experiment_id]);
+        return view('steps.update', ['step' => $step, 'project' => $project, 'experiment' => $experiment]);
     }
 
-    public function add_form($id, $experiment_id)
+    public function add_form(Project $project, Experiment $experiment)
     {
-        return view('steps.add', ['project_id' => $id, 'experiment_id' => $experiment_id]);
+        return view('steps.add', ['project' => $project, 'experiment' => $experiment]);
     }
 
     public function add(Request $request)

@@ -15,11 +15,8 @@ class ExperimentController extends Controller
         return view('experiment.index', ['project' => $project]);
     }
 
-    public function show($id, $experiment_id)
+    public function show(Project $project, Experiment $experiment)
     {
-        $experiment = Experiment::find($experiment_id);
-        $segments = Segment::where('project_id', $id)->get();
-
         $experimentSegments = array();
 
         foreach ($experiment->segments as $expSegmItem){
@@ -27,15 +24,13 @@ class ExperimentController extends Controller
         }
 
         return view('experiment.update',
-            ['experiment' => $experiment, 'segments' => $segments, 'project_id' => $id,
+            ['experiment' => $experiment, 'project' => $project,
                 'experimentSegments' => $experimentSegments]);
     }
 
-    public function add_form($id)
+    public function add_form(Project $project)
     {
-        $segments = Segment::where('project_id', $id)->get();
-
-        return view('experiment.add', ['project_id' => $id, 'segments' => $segments]);
+        return view('experiment.add', ['project' => $project, 'segments' => $project->segments]);
     }
 
     public function add(Request $request)

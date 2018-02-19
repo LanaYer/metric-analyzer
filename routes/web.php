@@ -39,7 +39,7 @@ Route::post('/project-add', [
 /*
     Редактирование проекта
 */
-Route::get('/dashboard/project/{id}', 'ProjectController@index')->name('project');
+Route::get('/dashboard/project/{project}', 'ProjectController@index')->name('project');
 
 Route::post('/project-update', 'ProjectController@update')->name('project-update');
 
@@ -47,7 +47,7 @@ Route::post('/project-update', 'ProjectController@update')->name('project-update
 /*
     Сегменты
 */
-Route::group(['prefix' => '/dashboard/project/{id}/segment'], function () {
+Route::group(['prefix' => '/dashboard/project/{project}/segment'], function () {
 
     Route::get('/', [
         'middleware' => 'auth',
@@ -59,7 +59,7 @@ Route::group(['prefix' => '/dashboard/project/{id}/segment'], function () {
         'uses' => 'SegmentController@add_form'
     ])->name('segment-add-form');
 
-    Route::get('/{segment_id}', [
+    Route::get('/{segment}', [
         'middleware' => 'auth',
         'uses' => 'SegmentController@show'
     ])->name('segment');
@@ -77,7 +77,7 @@ Route::post('/segment-update',[ 'middleware' => 'auth', 'uses' => 'SegmentContro
     Страницы
 */
 
-Route::group(['prefix' => '/dashboard/project/{id}/page'], function () {
+Route::group(['prefix' => '/dashboard/project/{project}/page'], function () {
 
     Route::get('/', [
         'middleware' => 'auth',
@@ -89,7 +89,7 @@ Route::group(['prefix' => '/dashboard/project/{id}/page'], function () {
         'uses' => 'PageController@add_form'
     ])->name('page-add-form');
 
-    Route::get('/{page_id}', [
+    Route::get('/{page}', [
         'middleware' => 'auth',
         'uses' => 'PageController@show'
     ])->name('page');
@@ -120,12 +120,12 @@ Route::group(['prefix' => '/dashboard/project/{project}/experiment'], function (
         'uses' => 'ExperimentController@add_form'
     ])->name('experiment-add-form');
 
-    Route::get('/{experiment_id}', [
+    Route::get('/{experiment}', [
         'middleware' => 'auth',
         'uses' => 'ExperimentController@show'
     ])->name('experiment');
 
-    Route::get('/{experiment_id}/results', [
+    Route::get('/{experiment}/results', [
         'middleware' => 'auth',
         'uses' => 'ResultsController@index'
     ])->name('results');
@@ -133,7 +133,7 @@ Route::group(['prefix' => '/dashboard/project/{project}/experiment'], function (
     /*
     Этапы эксперимента
 */
-    Route::group(['prefix' => '/{experiment_id}/step'], function () {
+    Route::group(['prefix' => '/{experiment}/step'], function () {
 
         Route::get('/', [
             'middleware' => 'auth',
@@ -145,7 +145,7 @@ Route::group(['prefix' => '/dashboard/project/{project}/experiment'], function (
             'uses' => 'StepController@add_form'
         ])->name('step-add-form');
 
-        Route::get('/{step_id}', [
+        Route::get('/{step}', [
             'middleware' => 'auth',
             'uses' => 'StepController@show'
         ])->name('step');

@@ -3,8 +3,8 @@
 @section('breadcrumbs')
     <ul class="breadcrumb">
         <li><a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a><i class="icon-angle-right"></i></li>
-        <li><a href="/dashboard/project/{{ $project_id }}">{{ $project_id }}</a><i class="icon-angle-right"></i></li>
-        <li><a href="/dashboard/project/{{ $project_id }}/page">Страницы</a><i class="icon-angle-right"></i></li>
+        <li><a href="/dashboard/project/{{ $project->id }}">{{ $project->id }}</a><i class="icon-angle-right"></i></li>
+        <li><a href="/dashboard/project/{{ $project->id }}/page">Страницы</a><i class="icon-angle-right"></i></li>
         <li class="active">Новая страница</li>
     </ul>
 @stop
@@ -20,7 +20,7 @@
                         <form class="form-horizontal" method="POST" action="{{ route('page-add') }}">
                             {{ csrf_field() }}
 
-                            <input name="project_id" value="{{ $project_id }}" hidden>
+                            <input name="project_id" value="{{ $project->id }}" hidden>
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-2 control-label">Название</label>
@@ -55,7 +55,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Создать
                                     </button>
-                                    <a href="/dashboard/project/{{ $project_id }}/page">
+                                    <a href="/dashboard/project/{{ $project->id }}/page">
                                         <button type="button" class="btn btn-secondary">Отмена</button>
                                     </a>
                                 </div>

@@ -54,4 +54,13 @@ class Project extends Model
     {
         return $this->hasMany(Experiment::class);
     }
+
+    public function segments()
+    {
+        return $this->hasMany(Segment::class);
+    }
+    public function pages()
+    {
+        return $this->hasMany(Page::class);
+    }
 }
