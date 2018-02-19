@@ -17,11 +17,7 @@ class ExperimentController extends Controller
 
     public function show(Project $project, Experiment $experiment)
     {
-        $experimentSegments = array();
-
-        foreach ($experiment->segments as $expSegmItem){
-            array_push($experimentSegments, $expSegmItem->id);
-        }
+        $experimentSegments = $experiment->segments->pluck('id')->all();
 
         return view('experiment.update',
             ['experiment' => $experiment, 'project' => $project,

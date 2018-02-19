@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Segment;
 use Illuminate\Http\Request;
-use App\Models\Page;
 
 class SegmentController extends Controller
 {
@@ -17,11 +16,7 @@ class SegmentController extends Controller
 
     public function show(Project $project, Segment $segment)
     {
-        $pagesSegments = array();
-
-        foreach ($segment->pages() as $pageSegmItem){
-            array_push($pagesSegments, $pageSegmItem->id);
-        }
+        $pagesSegments = $segment->pages->pluck('id')->all();
 
         return view('segment.update', ['segment' => $segment, 'project' => $project,
             'pagesSegments' => $pagesSegments ]);
