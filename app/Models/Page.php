@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Segment
  * @package App\Models
+
+ * @property integer $id
+ * @property integer $project_id
+ * @property string $name
  *
  * @property string $pages
  */

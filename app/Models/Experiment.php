@@ -10,6 +10,12 @@ use Illuminate\Database\Eloquent\Model;
  * @package App\Models
  *
  * @property integer $project_id
+ * @property integer $id
+ * @property string $name;
+ * @property string $description
+ * @property string $added_at
+ * @property integer $is_abtest
+ * @property integer $is_active
  *
  * @property Segment[] $segments
  * @property Project $project

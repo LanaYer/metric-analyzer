@@ -8,6 +8,11 @@ use \Illuminate\Database\Eloquent\Builder ;
 
 /**
  * Class Project
+
+ * @property integer $id
+ * @property integer $experiment_id
+ * @property string $description
+ * @property string $start_at
  *
  * @property string $ym_login
  * @property string $ym_token

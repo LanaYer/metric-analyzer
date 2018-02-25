@@ -10,6 +10,10 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property string $pages
  *
+ * @property integer $id
+ * @property integer $project_id
+ * @property string $name
+ *
  */
 class Segment extends Model
 {

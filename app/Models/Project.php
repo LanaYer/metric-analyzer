@@ -11,6 +11,12 @@ use \Illuminate\Database\Eloquent\Builder ;
  *
  * @property string $ym_login
  * @property string $ym_token
+ * @property integer $id
+ * @property integer $user_id
+ * @property string $name
+ * @property string $url
+ * @property string $added_at
+ * @property integer $is_active
  *
  */
 class Project extends Model
@@ -59,6 +65,7 @@ class Project extends Model
     {
         return $this->hasMany(Segment::class);
     }
+
     public function pages()
     {
         return $this->hasMany(Page::class);
