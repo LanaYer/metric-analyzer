@@ -42,7 +42,8 @@ Route::post('/project-add', [
 Route::get('/dashboard/project/{project}', ['middleware' =>  ['auth', 'user'], 'uses' => 'ProjectController@index'])
     ->name('project');
 
-Route::post('/project-update', ['middleware' =>  ['auth', 'user'], 'uses' => 'ProjectController@update'])
+
+Route::post('/project-update', ['middleware' =>  ['auth'], 'uses' => 'ProjectController@update'])
     ->name('project-update');
 
 

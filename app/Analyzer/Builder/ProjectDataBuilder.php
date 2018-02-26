@@ -32,11 +32,12 @@ class ProjectDataBuilder
     {
         $result = [];
         $loader = new VisitReport($this->project->ym_login, $this->project->ym_token);
+        $lastWeek = Carbon::now()->startOfWeek();
         foreach ($this->getWeeks() as $week)
         {
             $reportFile = $this->getReportFileName($week);
 
-            if ($week->isLastWeek() || !is_file($reportFile)) {
+            if ($week == $lastWeek || !is_file($reportFile)) {
                 $file = $this->getReportFile($week);
                 $content = $loader->load($week, (new Carbon($week))->addDay(6));
                 if (!empty($content)) {
@@ -64,7 +65,7 @@ class ProjectDataBuilder
 
         $periods = [];
 
-        while ($startAt->timestamp < $currentWeek->timestamp) {
+        while ($startAt->timestamp <= $currentWeek->timestamp) {
             $periods[] = new Carbon($startAt);
             $startAt->addWeek();
         }
