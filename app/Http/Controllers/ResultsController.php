@@ -11,7 +11,7 @@ class ResultsController extends Controller
 {
     public function index(Project $project, Experiment $experiment)
     {
-        $graphs = $experiment->first()->getGraphs();
+        $graphs = $experiment->getGraphs();
 
         if (file_exists($graphs['visits']['data'])){
 
