@@ -18,6 +18,9 @@ use \Illuminate\Database\Eloquent\Builder ;
  * @property string $added_at
  * @property integer $is_active
  *
+ * @property Page[] $pages
+ * @property Segment[] $segments
+ *
  */
 class Project extends Model
 {
@@ -34,7 +37,8 @@ class Project extends Model
      * @param Builder $query
      * @param null    $case
      * @param bool    $multiple
-     * @return mixed
+     *
+     * @return Builder
      */
     public function scopeActive(Builder $query, $case = null, bool $multiple = false)
     {
@@ -56,16 +60,27 @@ class Project extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function experiments()
     {
         return $this->hasMany(Experiment::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function segments()
     {
         return $this->hasMany(Segment::class);
     }
 
+    /**
+     * Страницы у проекта
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function pages()
     {
         return $this->hasMany(Page::class);

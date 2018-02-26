@@ -9,11 +9,24 @@ use App\Models\Project;
 class PageController extends Controller
 {
 
+    /**
+     * Стартовая страница проекта
+     *
+     * @param Project $project
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Project $project)
     {
         return view('page.index', ['project' => $project]);
     }
 
+    /**
+     *
+     *
+     * @param Project $project
+     * @param Page $page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Project $project, Page $page)
     {
         return view('page.update', ['page' => $page, 'project' => $project]);
