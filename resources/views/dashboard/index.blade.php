@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var $projects
+ *
+ *
+ */
+?>
+
 @section('breadcrumbs')
     <ul class="breadcrumb">
         <li class="active"><i class="fa fa-home"></i> Dashboard</li>

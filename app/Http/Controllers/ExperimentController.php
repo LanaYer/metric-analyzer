@@ -10,11 +10,20 @@ use App\Models\Project;
 class ExperimentController extends Controller
 {
 
+    /**
+     * @param Project $project
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Project $project)
     {
         return view('experiment.index', ['project' => $project]);
     }
 
+    /**
+     * @param Project $project
+     * @param Experiment $experiment
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Project $project, Experiment $experiment)
     {
         $experimentSegments = $experiment->segments->pluck('id')->all();
@@ -24,11 +33,19 @@ class ExperimentController extends Controller
                 'experimentSegments' => $experimentSegments]);
     }
 
+    /**
+     * @param Project $project
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function add_form(Project $project)
     {
         return view('experiment.add', ['project' => $project, 'segments' => $project->segments]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function add(Request $request)
     {
         $isAbtest = 0;
@@ -55,6 +72,10 @@ class ExperimentController extends Controller
         return redirect('/dashboard/project/'.$request->project_id.'/experiment');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update(Request $request)
     {
         $experiment = Experiment::find($request->id);

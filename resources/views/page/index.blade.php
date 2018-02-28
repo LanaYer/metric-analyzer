@@ -2,7 +2,7 @@
 <?php
 /**
  * @var \App\Models\Project $project
- *
+ * @var \App\Models\Page $page
  *
  */
 ?>

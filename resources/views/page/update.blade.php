@@ -1,5 +1,11 @@
 @extends('layouts.app')
-
+<?php
+/**
+ * @var \App\Models\Project $project
+ * @var \App\Models\Page $page
+ *
+ */
+?>
 @section('breadcrumbs')
     <ul class="breadcrumb">
         <li><a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a><i class="icon-angle-right"></i></li>

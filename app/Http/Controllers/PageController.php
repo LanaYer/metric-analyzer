@@ -32,11 +32,19 @@ class PageController extends Controller
         return view('page.update', ['page' => $page, 'project' => $project]);
     }
 
+    /**
+     * @param Project $project
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function add_form(Project $project)
     {
         return view('page.add', ['project' => $project]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function add(Request $request)
     {
         Page::create([
@@ -47,6 +55,10 @@ class PageController extends Controller
         return redirect('/dashboard/project/'.$request->project_id.'/page');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update(Request $request)
     {
         $page = Page::find($request->page_id);

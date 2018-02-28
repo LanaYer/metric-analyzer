@@ -9,6 +9,11 @@ use App\Models\Project;
 
 class ResultsController extends Controller
 {
+    /**
+     * @param Project $project
+     * @param Experiment $experiment
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Project $project, Experiment $experiment)
     {
         $graphs = $experiment->getGraphs();

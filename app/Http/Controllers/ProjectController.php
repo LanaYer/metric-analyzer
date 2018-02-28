@@ -9,11 +9,19 @@ class ProjectController extends Controller
 {
     protected $redirectTo = '/home';
 
+    /**
+     * @param Project $project
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Project $project)
     {
         return view('project.update', ['project' => $project]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function add(Request $request)
     {
         Project::create([
@@ -26,6 +34,10 @@ class ProjectController extends Controller
         return redirect('/dashboard');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update(Request $request)
     {
         $project = Project::find($request->id);
