@@ -48,6 +48,11 @@ class Experiment extends Model
     {
         return $this->hasMany(Step::class);
     }
+
+    public function pages()
+    {
+        return $this->belongsToMany(Page::class, 'experiment_pages');
+    }
     /**
      * Активные проекты
      *

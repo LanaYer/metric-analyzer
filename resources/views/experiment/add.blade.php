@@ -68,19 +68,34 @@
                                 <label for="ym_token" class="col-md-2 control-label">Сегменты</label>
 
                                 <div class="col-md-10">
-                                    <select multiple="multiple" id="js-example-basic-multiple" name="segments[]">
+                                    <select multiple="multiple" id="js-segments-multiple" name="segments[]">
                                         @foreach($project->segments as $segment)
                                             <option value="{{$segment->id}}">{{$segment->name}}</option>
                                         @endforeach
                                     </select>
                                     <script>
                                         $(document).ready(function() {
-                                            $('#js-example-basic-multiple').select2();
+                                            $('#js-segments-multiple').select2();
                                         });
                                     </script>
                                 </div>
                             </div>
+                            <div class="form-group{{ $errors->has('ym_token') ? ' has-error' : '' }}">
+                                <label for="ym_token" class="col-md-2 control-label">Страницы</label>
 
+                                <div class="col-md-10">
+                                    <select multiple="multiple" id="js-pages-multiple" name="pages[]">
+                                        @foreach($project->pages as $page)
+                                            <option value="{{$page->id}}">{{$page->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $('#js-pages-multiple').select2();
+                                        });
+                                    </script>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <div class="col-md-12 text-center">

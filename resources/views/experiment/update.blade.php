@@ -84,8 +84,8 @@
                                 <label for="ym_token" class="col-md-2 control-label">Сегменты</label>
 
                                 <div class="col-md-10">
-                                    <select multiple="multiple" id="js-example-basic-multiple" name="segments[]">
-                                        @foreach($experiment->segments as $segment)
+                                    <select multiple="multiple" id="js-segment-multiple" name="segments[]">
+                                        @foreach($project->segments as $segment)
                                             @if (in_array($segment->id, $experimentSegments))
                                                  <option value="{{$segment->id}}" selected="selected">{{$segment->name}}</option>
                                             @else
@@ -95,7 +95,28 @@
                                     </select>
                                     <script>
                                         $(document).ready(function() {
-                                            $('#js-example-basic-multiple').select2();
+                                            $('#js-segment-multiple').select2();
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('ym_token') ? ' has-error' : '' }}">
+                                <label for="ym_token" class="col-md-2 control-label">Страницы</label>
+
+                                <div class="col-md-10">
+                                    <select multiple="multiple" id="js-page-multiple" name="pages[]">
+                                        @foreach($project->pages as $page)
+                                            @if (in_array($page->id, $experimentPages))
+                                                <option value="{{$page->id}}" selected="selected">{{$page->name}}</option>
+                                            @else
+                                                <option value="{{$page->id}}">{{$page->name}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $('#js-page-multiple').select2();
                                         });
                                     </script>
                                 </div>

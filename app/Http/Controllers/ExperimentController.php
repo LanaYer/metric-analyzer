@@ -27,10 +27,12 @@ class ExperimentController extends Controller
     public function show(Project $project, Experiment $experiment)
     {
         $experimentSegments = $experiment->segments->pluck('id')->all();
+        $experimentPages = $experiment->pages->pluck('id')->all();
 
         return view('experiment.update',
             ['experiment' => $experiment, 'project' => $project,
-                'experimentSegments' => $experimentSegments]);
+                'experimentSegments' => $experimentSegments,
+                'experimentPages' => $experimentPages]);
     }
 
     /**
@@ -69,6 +71,13 @@ class ExperimentController extends Controller
             }
         }
 
+        if ($request->pages){
+            foreach ($request->pages as $page){
+
+                $experiment->pages()->attach($page, ['experiment_id' => $experiment->id]);
+            }
+        }
+
         return redirect('/dashboard/project/'.$request->project_id.'/experiment');
     }
 
@@ -102,6 +111,15 @@ class ExperimentController extends Controller
             foreach ($request->segments as $segment){
 
                 $experiment->segments()->attach($segment, ['experiment_id' => $experiment->id]);
+            }
+        }
+
+        $experiment->pages()->detach();
+
+        if ($request->pages){
+            foreach ($request->pages as $page){
+
+                $experiment->pages()->attach($page, ['experiment_id' => $experiment->id]);
             }
         }
 

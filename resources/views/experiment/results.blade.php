@@ -20,6 +20,8 @@
     <div class="container">
         <div class="col-md-9">
 
+            <h4 class="text-center">Эксперимент {{ $experiment->id }}</h4>
+
             @if ($config=="")
                 CSV файл не найден
             @endif
@@ -27,34 +29,22 @@
             <canvas id="canvas"></canvas>
 
             <script>
-                var colors =
-                    [
-                        'rgb(0, 0, 0)',
-                        'rgb(255, 99, 132)', //red
-                        'rgb(54, 162, 235)', //blue
-                        'rgb(75, 192, 192)', //green
-                        'rgb(255, 205, 86)', //yellow
-                        'rgb(153, 102, 255)', //purple
-                        'rgb(255, 159, 64)', //orange
-                        'rgb(201, 203, 207)']; //grey
-
                 var config = <?php echo $config;?>;
 
                 window.onload = function() {
                     var ctx = document.getElementById("canvas").getContext("2d");
                     window.myLine = new Chart(ctx, config);
                 };
-
-                var colorNames = Object.keys(window.chartColors);
-
             </script>
 
         </div>
 
         <div class="col-md-3 result_page-steps">
-            <h4>Этапы</h4>
+            <h5>Этапы</h5>
             @foreach($experiment->steps as $step)
-                <p><span>{{$step->start_at}}</span> - {{$step->description}}</p>
+                <div class="result_page-step">
+                    <p><span>{{$step->start_at}}</span> - {{$step->description}}</p>
+                </div>
             @endforeach
         </div>
     </div>
